@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView5"
+        android:src="@drawable/weddingdress5"
+        android:alpha=".2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold|italic"
+        android:textSize="30sp"
+        android:text="CONGRATULATIONS"
+        android:id="@+id/messageTitleTV"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="54dp"
+        android:layout_marginLeft="100dp"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"
+        android:text="The results of your search have been email to you.  Thanks for using P2P Weddings.  We hope you found your dream dress!"
+        android:layout_below="@+id/messageTitleTV"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/firstPara"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"
+        android:text="From"
+        android:layout_below="@+id/firstPara"
+        android:id="@+id/signature"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"
+        android:text="The P2P Wedding Team!"
+        android:layout_below="@+id/signature"
+        android:id="@+id/p2pTeam"
+        />
+
+</RelativeLayout>

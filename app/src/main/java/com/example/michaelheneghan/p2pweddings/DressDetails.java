@@ -107,11 +107,13 @@ public class DressDetails extends Activity {
                 Designer + "', '" + Style + "', '" + WhatSize + "', '" + WantViel + "', '" + DryCleaningCost + "');");
 
         String result = getProfileID(idReceived);
-
+        //Checking that info is passed to the database
         if(result != null){
-            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Information stored", Toast.LENGTH_SHORT).show();
         }
 
+        Intent startSearchActivity = new Intent(DressDetails.this, SearchCriteria.class);
+        startActivity(startSearchActivity);
 
     }
 
@@ -317,25 +319,13 @@ public class DressDetails extends Activity {
 
     }
 
-
+    // on click method to take user to googlemaps using an intent
     public void enterLocation(View view) {
-
 
         Intent startGoogleSplash = new Intent(DressDetails.this, GoogleMapsSplash.class);
         startActivity(startGoogleSplash);
         Toast.makeText(DressDetails.this, "Button Clicked", Toast.LENGTH_SHORT).show();
         //enterYourLocation = (Button) findViewById(R.id.locationButton);
-/*
-        enterYourLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    Intent startGoogleSplash = new Intent(DressDetails.this, GoogleMapsSplash.class);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-*/
+
     }
 }
