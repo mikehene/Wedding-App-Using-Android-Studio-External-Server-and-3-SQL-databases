@@ -22,8 +22,8 @@ import java.io.File;
  */
 public class DressDetails extends Activity {
 
-    Spinner designerSpin, styleSpin, sizeSpin,vielSpin, cleaningSpin;
-    Button searchButton;
+    Spinner designerSpin, styleSpin, sizeSpin,vielSpin, cleaningSpin, goToGoogleMaps;
+    Button enterYourLocation, searchButton;
     String designer, ImportPhotos, size, style, viel, cleaning, idReceived;
 
     SQLiteDatabase myDB = null;
@@ -38,17 +38,18 @@ public class DressDetails extends Activity {
         sizeSpin = (Spinner) findViewById(R.id.sizeSpinner);
         vielSpin = (Spinner) findViewById(R.id.vielSpinner);
         cleaningSpin = (Spinner) findViewById(R.id.cleaningSpinner);
+        enterYourLocation = (Button) findViewById(R.id.locationButton);
+        searchButton = (Button) findViewById(R.id.searchBut);
 
         createDatabase(null);
         //addDesigner();
         //addListenerDesignSpinner();
         addStyleSpinner();
         addListenerStyleSpinner();
-
-        addVielSpinner();
-        addListenerVielSpinner();
         addSizeSpinner();
         addListenerSizeSpinner();
+        addVielSpinner();
+        addListenerVielSpinner();
         addDryCleaningSpinner();
         addListenerDryCleaningSpinner();
 
@@ -317,15 +318,24 @@ public class DressDetails extends Activity {
     }
 
 
+    public void enterLocation(View view) {
 
 
-
+        Intent startGoogleSplash = new Intent(DressDetails.this, GoogleMapsSplash.class);
+        startActivity(startGoogleSplash);
+        Toast.makeText(DressDetails.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+        //enterYourLocation = (Button) findViewById(R.id.locationButton);
 /*
-    public void gotogooglemaps(View view) {
-
-        Intent myIntent = new Intent(DressDetails.this,GoogleMapsSplash.class);
-        //myIntent.putExtra("idPassed",getEmail(userEmail));
-        startActivity(myIntent);
-
-    }*/
+        enterYourLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    Intent startGoogleSplash = new Intent(DressDetails.this, GoogleMapsSplash.class);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+*/
+    }
 }

@@ -58,7 +58,6 @@
                 android:id="@+id/photoImportSpin"
                 />
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -165,18 +164,19 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="30dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/LocationTV"
+                android:text="@string/Enter_Location_Button"
                 android:textStyle="bold|italic"
                 android:textSize="20dp"
                 android:id="@+id/locationTV"
                 />
 
-            <Spinner
+            <Button
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right|top"
-                android:id="@+id/locationSpinner"/>
-                <!--android:onClick="gotogooglemaps"-->
+                android:id="@+id/locationButton"
+                android:onClick="enterLocation"/>
+
 
     </GridLayout>
 
