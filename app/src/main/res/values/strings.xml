@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">P2P Weddings</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyCx9dnyfKJ7_5onJbAMmDZx1iNZhT0XCII
+    </string>
+    <string name="title_activity_maps">Map</string>
+    <string name="NewUserRegisterButton">Register</string>
+    <string name="UserLogInButton">Log In</string>
+    <string name="ToggleMusicTV">Turn music on/off</string>
+    <string name="DressXMLTitle">Dress details</string>
+    <string name="PhotoImportTV">Import your photos</string>
+    <string name="StyleTV">Style</string>
+    <string name="DressCollectionTV">Collection only</string>
+    <string name="VielTV">Viel</string>
+    <string name="SizeTV">Size</string>
+    <string name="DryCleaningTV">Dry cleaning cost</string>
+    <string name="LocationTV">Location</string>
+    <string name="DressDetailsSearchBut">Search</string>
+    <string name="LogInXMLTitle">Log In</string>
+    <string name="UsernameTV">Please enter your username below...</string>
+    <string name="UsernameHintTV">Username</string>
+    <string name="PasswordTV">Please enter your password below...</string>
+    <string name="PasswordHintTV">Password</string>
+    <string name="LogInBut">Log In</string>
+    <string name="RegisterTitleTV">Register</string>
+    <string name="RegisterUsernameTV">Please enter a Username below...</string>
+    <string name="RegisterUsernameHintTV">user@email.com</string>
+    <string name="RegisterPasswordTV">Please enter a password below...</string>
+    <string name="RegisterPasswordHintTV">password</string>
+    <string name="RegisterLogInBut">Log In</string>
+    <string name="RegisterShowPassCharsTV">Show password characters</string>
+    <string name="ProfileTitleTV">Profile</string>
+    <string name="ProfileNameTV">Name</string>
+    <string name="ProfileNameHint">Enter your name here...</string>
+    <string name="ProfileAddressTV">Address</string>
+    <string name="ProfileAddressHint">Enter your address here...</string>
+    <string name="ProfileEmailTV">Email</string>
+    <string name="ProfileEmailHintTV">Enter your email address here...</string>
+    <string name="ProfileRentBuyTV">Rent/Buy</string>
+    <string name="ProfileSaleValueTV">Sale Value</string>
+    <string name="ProfileRentalPricePDTV">Rental Price Per day</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="NoOfDays">
+        <item>1 day</item>
+        <item>2 days</item>
+        <item>3 days</item>
+        <item>3-5 days</item>
+        <item>7 days</item>
+        <item>10 days</item>
+        <item>2 weeks</item>
+    </string-array>
+
+</resources>

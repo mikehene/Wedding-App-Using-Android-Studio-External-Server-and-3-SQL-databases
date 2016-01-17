@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView3"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/weddingdress4"
+        android:alpha=".2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/RegisterTitleTV"
+        android:id="@+id/registerTitleTV"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:textStyle="bold|italic"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/RegisterUsernameTV"
+        android:id="@+id/registerUsernameTV"
+        android:layout_below="@+id/registerTitleTV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:gravity="left"
+        android:paddingLeft="25dp" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/UsernameInputET"
+        android:layout_below="@+id/registerUsernameTV"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="20dp"
+        android:hint="@string/RegisterUsernameHintTV" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/RegisterPasswordTV"
+        android:id="@+id/registerPasswordTV"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:layout_below="@+id/UsernameInputET"
+        android:layout_alignStart="@+id/UsernameInputET"
+        android:gravity="left"
+        android:paddingLeft="3dp" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/PasswordET"
+        android:layout_below="@+id/registerPasswordTV"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="20dp"
+        android:hint="@string/RegisterPasswordHintTV"
+        android:password="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/RegisterLogInBut"
+        android:id="@+id/passwordSubmitButton"
+        android:layout_below="@+id/PasswordET"
+        android:layout_alignStart="@+id/PasswordET"
+        android:onClick="passwordEntered"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/RegisterShowPassCharsTV"
+        android:id="@+id/showCharsTV"
+        android:layout_alignBaseline="@+id/registerCharTB"
+        android:layout_alignBottom="@+id/registerCharTB"
+        android:layout_alignStart="@+id/passwordSubmitButton"
+        android:textStyle="italic"
+        />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New ToggleButton"
+            android:id="@+id/registerCharTB"
+            android:onClick="regCharTBEntered"
+            android:textSize="10dp"
+            android:textStyle="italic"
+            android:layout_below="@+id/passwordSubmitButton"
+            android:layout_alignEnd="@+id/PasswordET"
+            android:layout_marginTop="25dp" />
+
+
+
+
+</RelativeLayout>

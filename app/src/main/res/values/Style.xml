@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="Style">
+        <item>Off the shoulder</item>
+        <item>Fairy Tale</item>
+        <item>Long Sleeved</item>
+        <item>Halter Kneck</item>
+        <item>Vintage</item>
+        <item>Mid-Length</item>
+        <item>Mermaid</item>
+        <item>Ballgown</item>
+        <item>Trumpet</item>
+    </string-array>
+
+</resources>

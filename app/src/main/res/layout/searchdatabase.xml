@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView5"
+        android:src="@drawable/weddingdress1"
+        android:alpha=".2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find the dress of you dreams"
+        android:id="@+id/searchTV"
+        android:gravity="top|center"
+        android:textSize="25sp"
+        android:textStyle="bold|italic"
+        android:paddingTop="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15dp"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="20dp"
+        android:columnCount="2"
+        android:rowCount="6"
+        android:padding="25dp"
+        android:layout_below="@+id/searchTV"
+        android:id="@+id/gridLayout"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Search by designer"
+            android:textStyle="bold|italic"
+            android:textSize="20dp"
+            android:id="@+id/designerTV"
+            />
+
+                <Spinner
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right|top"
+                    android:id="@+id/designer_Spin"
+                    android:onClick="chooseDisgnerSpinner"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|top"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="rentbuy"
+                    android:textStyle="bold|italic"
+                    android:textSize="20dp"
+                    />
+
+                <Spinner
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right|top"
+                    android:id="@+id/rentbuySpin"
+                    android:onClick="addRentBuy"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|top"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Style"
+                    android:textStyle="bold|italic"
+                    android:textSize="20dp"
+                    android:id="@+id/styleTV"
+                    />
+
+                <Spinner
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right|top"
+                    android:id="@+id/styleSpin"
+                    android:onClick="addStyleSpinner"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|top"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Size"
+                    android:textStyle="bold|italic"
+                    android:textSize="20dp"
+                    android:id="@+id/sizeTV"
+                    />
+
+                <Spinner
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right|top"
+                    android:id="@+id/sizeSpin"
+                    android:onClick="addSizeSpinner"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|top"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Number of days"
+                    android:textStyle="bold|italic"
+                    android:textSize="20dp"
+                    android:id="@+id/NoOfDaysTV"
+                    />
+
+                <Spinner
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right|top"
+                    android:id="@+id/SearchViel"
+                    android:onClick="addSearchVielSpinner"
+                    />
+
+            </GridLayout>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:id="@+id/button2"
+                android:layout_below="@+id/gridLayout"
+                android:layout_centerHorizontal="true"
+                android:onClick="SearchTheDatabase"/>
+
+
+        </RelativeLayout>

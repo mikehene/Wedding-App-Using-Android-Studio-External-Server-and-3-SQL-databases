@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="DesignerChoice">
+        <item>Vera Wang</item>
+        <item>Versace</item>
+        <item>Angel Sanchez</item>
+        <item>Carolina Herrera</item>
+        <item>Hayley Paige</item>
+        <item>Reem Acra</item>
+        <item>Peter Langner</item>
+        <item>Pronovias</item>
+        <item>Marchesa</item>
+
+
+    </string-array>
+
+</resources>
