@@ -33,15 +33,15 @@ public class DressDetails extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dresses);
 
-        designerSpin = (Spinner) findViewById(R.id.designSpinner);
+        //designerSpin = (Spinner) findViewById(R.id.designSpinner);
         styleSpin = (Spinner) findViewById(R.id.styleSpinner);
         sizeSpin = (Spinner) findViewById(R.id.sizeSpinner);
         vielSpin = (Spinner) findViewById(R.id.vielSpinner);
         cleaningSpin = (Spinner) findViewById(R.id.cleaningSpinner);
 
         createDatabase(null);
-        addDesigner();
-        addListenerDesignSpinner();
+        //addDesigner();
+        //addListenerDesignSpinner();
         addStyleSpinner();
         addListenerStyleSpinner();
 
@@ -127,7 +127,7 @@ public class DressDetails extends Activity {
         return tempStyle + " : " + two;
     }
 
-
+/*
 
     public void addDesigner() {
 
@@ -165,7 +165,7 @@ public class DressDetails extends Activity {
             }
         });
     }
-
+*/
     // Insert back into activity once button and ET has been created in xml //
     public void addStyleSpinner(){
 
