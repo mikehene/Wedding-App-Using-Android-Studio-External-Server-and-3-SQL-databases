@@ -117,6 +117,28 @@ public class DressDetails extends Activity {
 
     }
 
+    public void inputExamples(){
+
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, style, size, viel, drycleaning) VALUES (1, 'Off the shoulder', " +
+                "6, 'Yes', '€25');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, style, size, viel, drycleaning) VALUES (2, 'Long Sleeved', " +
+                "8, 'No', '€50');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, style, size, viel, drycleaning) VALUES (3, 'Fairy Tale', " +
+                "10, 'Yes', '€75');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, style, size, viel, drycleaning) VALUES (4, 'Halter Kneck', " +
+                "12, 'No', '€100');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, style, size, viel, drycleaning) VALUES (5', 'Vintage', " +
+                "14, 'Yes', '€75');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, style, size, viel, drycleaning) VALUES (6, 'Mid-Length', " +
+                "16, 'No', '€50');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, style, size, viel, drycleaning) VALUES (7', 'Mermaid', " +
+                "18, 'Yes', '€25');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, style, size, viel, drycleaning) VALUES ('8', 'Ballgown', " +
+                "20, 'No', '€50');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, style, size, viel, drycleaning) VALUES (9', 'Trumpet', " +
+                "14, 'Yes', '€75');");
+    }
+
     private String getProfileID(String idReceived){
         String selectQuery = "SELECT size, style FROM dressdetails WHERE profile_id = ?";
         Cursor c = myDB.rawQuery(selectQuery, new String[] { idReceived });
@@ -325,7 +347,7 @@ public class DressDetails extends Activity {
         Intent startGoogleSplash = new Intent(DressDetails.this, GoogleMapsSplash.class);
         startActivity(startGoogleSplash);
         Toast.makeText(DressDetails.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-        //enterYourLocation = (Button) findViewById(R.id.locationButton);
+
 
     }
 }

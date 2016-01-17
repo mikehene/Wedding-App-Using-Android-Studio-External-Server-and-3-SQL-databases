@@ -36,9 +36,9 @@ public class UserPreferences extends Activity {
         addressET = (EditText) findViewById(R.id.addressET);
         emailET = (EditText) findViewById(R.id.emailET);
         //viewProfileET = (EditText) findViewById(R.id.viewProfileET);
-        deleteDressEt = (EditText) findViewById(R.id.deleteDressET);
+        //deleteDressEt = (EditText) findViewById(R.id.deleteDressET);
         createDatabase = (Button) findViewById(R.id.createDatabase);
-        deleteDressBut = (Button) findViewById(R.id.deleteDressBut);
+        //deleteDressBut = (Button) findViewById(R.id.deleteDressBut);
         salePriceET = (EditText) findViewById(R.id.salePriceET);
         rentalPriceET = (EditText) findViewById(R.id.rentalPriceET);
 
@@ -82,6 +82,26 @@ public class UserPreferences extends Activity {
             Log.e("Profile error", "Error Creating Database");
 
         }
+
+        // Prepopulate table with some examples
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('mikehene', 'home', 'mikehene@gmail.com', 'Rent', " +
+                "'€0', '€100');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('farrahbu', 'home', 'farrahbu87@gmail.com', 'Rent', " +
+                "'€0', '€25');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('hanSolo', 'home', 'hansolo@gmail.com', 'Rent', " +
+                "'€0', '€50');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('lukeSkywalker', 'home', 'lukeSkywalker@gmail.com', 'Rent', " +
+                "'€0', '€75');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('princessLeia', 'home', 'princessLeia@gmail.com', 'Rent', " +
+                "'€0', '€25');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('chewbacca', 'home', 'chewbacca@gmail.com', 'Rent', " +
+                "'€0', '€50');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('C3PO', 'home', 'C3PO@gmail.com', 'Rent', " +
+                "'€0', '€100');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('biWanKenobi', 'home', 'obiWanKenobi@gmail.com', 'Rent', " +
+                "'€0', '€75');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('yoda', 'home', 'yoda@gmail.com', 'Rent', " +
+                "'€0', '€50');");
     }
 
 
@@ -100,25 +120,26 @@ public class UserPreferences extends Activity {
         //Execute SQL statement to insert new data
         myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('" + userName + "', '" +
                 userAddress + "', '" + userEmail + "', '" + rentBuy + "', '" + dressSalePriceET + "', '" + dressRentalPriceET + "');");
-        try {
-            //Class DressClass = Class.forName("com.example.michaelheneghan.p2pweddings.DressDetails");
-            //Intent startRegister = new Intent(UserPreferences.this, DressDetails.class);
-            //startActivity(startRegister);
-            Intent myIntent = new Intent(UserPreferences.this,DressDetails.class);
-            myIntent.putExtra("idPassed",getEmail(userEmail));
+
+        if(rentBuy == "Buy"){
+            Intent myIntent = new Intent(UserPreferences.this,SearchCriteria.class);
             startActivity(myIntent);
+        }
+        try {
+
+            Intent myIntent2 = new Intent(UserPreferences.this,DressDetails.class);
+            myIntent2.putExtra("idPassed",getId(userEmail));
+            startActivity(myIntent2);
 
         }catch (Exception e){
             e.printStackTrace();
         }
 
-
-
     }
 
-    private String getEmail(String email){
+    private String getId(String email){
         String selectQuery = "SELECT id FROM profile WHERE useremail = ?";
-        Cursor c = myDB.rawQuery(selectQuery, new String[] { email });
+        Cursor c = myDB.rawQuery(selectQuery, new String[]{email});
         String tempId = "";
         if (c.moveToFirst()) {
             tempId = c.getString(c.getColumnIndex("id"));

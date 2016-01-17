@@ -66,14 +66,14 @@ public class SearchCriteria extends Activity {
 
         searchRentBuySpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String itemSelectedInSpinner =
                         parent.getItemAtPosition(position).toString();
                 rentBuy = itemSelectedInSpinner;
             }
 
             @Override
-        public void onNothingSelected(AdapterView<?> parent){
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
 
@@ -228,6 +228,8 @@ public class SearchCriteria extends Activity {
                 "profile.id = dressdetails.profile_id) WHERE dressdetails.rentbuy LIKE '%" + rentBuy + "%' AND " +
                 "dressdetails.size LIKE '%" + size + "%' AND dressdetails.style LIKE '%" + style + "%' AND dressdetails.viel LIKE '%"
                 + viel + "%';");
+
+        //Cursor cursor = myDB.rawQuery(query, null);
 
         Intent startResultMessage = new Intent(SearchCriteria.this, ResultsMessage.class);
         startActivity(startResultMessage);

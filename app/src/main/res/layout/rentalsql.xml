@@ -93,14 +93,7 @@
         </TableRow>
 
         <TableRow >
-            <TextView android:text="Delete Dress"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/deleteDressTV"
-                android:textStyle="bold|italic"
-                android:textSize="20dp"
-                android:padding="10dp"
-                />
+
         </TableRow>
 
     </TableLayout>
@@ -184,6 +177,21 @@
         android:hint="€____"
         />
 
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Submit Dress"
+        android:id="@+id/createDatabase"
+        android:textStyle="bold|italic"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/tableLayout"
+        android:layout_centerHorizontal="true"
+        android:onClick="InsertIntoDatabase"
+        android:clickable="true" />
+
+
+<!--
+
     <EditText
         android:layout_width="80dp"
         android:layout_height="35dp"
@@ -197,6 +205,7 @@
         android:layout_below="@+id/rentalPriceET"
         android:layout_marginTop="10dp"/>
 
+
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -207,17 +216,14 @@
         android:layout_below="@+id/tableLayout"
         android:layout_alignEnd="@+id/deleteDressET" />
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Submit Dress"
-        android:id="@+id/createDatabase"
+    <TextView android:text="Delete Dress"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/deleteDressTV"
         android:textStyle="bold|italic"
-        android:layout_marginTop="39dp"
-        android:layout_below="@+id/tableLayout"
-        android:layout_centerHorizontal="true"
-        android:onClick="InsertIntoDatabase"
-        android:clickable="true" />
+        android:textSize="20dp"
+        android:padding="10dp"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -239,5 +245,5 @@
         android:layout_below="@+id/deleteDressBut"
         android:layout_toEndOf="@+id/createDatabase" />
 
-
+-->
 </RelativeLayout>
