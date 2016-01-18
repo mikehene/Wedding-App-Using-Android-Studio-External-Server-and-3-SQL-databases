@@ -4,18 +4,22 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 
 /**
  * Created by michaelheneghan on 14/01/2016.
@@ -23,8 +27,9 @@ import java.io.File;
 public class DressDetails extends Activity {
 
     Spinner designerSpin, styleSpin, sizeSpin,vielSpin, cleaningSpin, goToGoogleMaps;
-    Button enterYourLocation, searchButton;
-    String designer, ImportPhotos, size, style, viel, cleaning, idReceived;
+    Button enterYourLocation, searchButton, photoImportButton;
+    String designer, ImportPhotos, size, style, viel, cleaning, idReceived, emailReceived;
+    private static final int SELECT_PHOTO = 1;
 
     SQLiteDatabase myDB = null;
 
@@ -40,6 +45,7 @@ public class DressDetails extends Activity {
         cleaningSpin = (Spinner) findViewById(R.id.cleaningSpinner);
         enterYourLocation = (Button) findViewById(R.id.locationButton);
         searchButton = (Button) findViewById(R.id.searchBut);
+        photoImportButton = (Button) findViewById(R.id.photoImportBut);
 
         createDatabase(null);
         //addDesigner();
@@ -53,10 +59,10 @@ public class DressDetails extends Activity {
         addDryCleaningSpinner();
         addListenerDryCleaningSpinner();
 
-        Intent recievedIntent = getIntent();
-        Bundle bundle = recievedIntent.getExtras();
-        idReceived = bundle.getString("idPassed");
-        Toast.makeText(this, idReceived, Toast.LENGTH_SHORT).show();
+        Intent recievedIntent2 = getIntent();
+        Bundle bundle2 = recievedIntent2.getExtras();
+        emailReceived = bundle2.getString("emailPassed");
+        Toast.makeText(this, emailReceived, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -91,6 +97,7 @@ public class DressDetails extends Activity {
 
         }
 
+
     }
 
     public void InsertIntoTheDatabase(View view) {
@@ -106,14 +113,10 @@ public class DressDetails extends Activity {
         myDB.execSQL("INSERT INTO dressdetails(profile_id, designer, style, size, viel, drycleaning) VALUES ('" + idReceived + "', '" +
                 Designer + "', '" + Style + "', '" + WhatSize + "', '" + WantViel + "', '" + DryCleaningCost + "');");
 
-        String result = getProfileID(idReceived);
-        //Checking that info is passed to the database
-        if(result != null){
-            Toast.makeText(this, "Information stored", Toast.LENGTH_SHORT).show();
-        }
-
-        Intent startSearchActivity = new Intent(DressDetails.this, SearchCriteria.class);
-        startActivity(startSearchActivity);
+        // sending email adress to next activity
+        Intent sendEmail = new Intent (DressDetails.this, SearchCriteria.class);
+        sendEmail.putExtra("emailaddresspassed", emailReceived);
+        startActivity(sendEmail);
 
     }
 
@@ -151,6 +154,7 @@ public class DressDetails extends Activity {
         c.close();
         return tempStyle + " : " + two;
     }
+
 
 /*
 
@@ -341,7 +345,7 @@ public class DressDetails extends Activity {
 
     }
 
-    // on click method to take user to googlemaps using an intent
+    // on click intent to take user to googlemaps using an intent
     public void enterLocation(View view) {
 
         Intent startGoogleSplash = new Intent(DressDetails.this, GoogleMapsSplash.class);
@@ -349,5 +353,39 @@ public class DressDetails extends Activity {
         Toast.makeText(DressDetails.this, "Button Clicked", Toast.LENGTH_SHORT).show();
 
 
+    }
+    // on click intent to take user into their devices image library to choose a picture to display
+    public void importPhotoFromGallery(View view) {
+
+        photoImportButton = (Button) findViewById(R.id.photoImportBut);
+
+        photoImportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+            }
+        });
+    }
+
+    // Method to receive bundle with image Uri and convert to bitmap so it can be inputted into the database
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+        
+        try{
+            switch(requestCode) {
+                case SELECT_PHOTO:
+                    if (resultCode == RESULT_OK) {
+                        Uri selectedImage = imageReturnedIntent.getData();
+                        InputStream imageStream = getContentResolver().openInputStream(selectedImage);
+                        Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+                    }
+            }
+        // Catch input/output errors
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
     }
 }

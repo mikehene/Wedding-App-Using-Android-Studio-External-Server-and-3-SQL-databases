@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,14 +21,17 @@ import android.widget.Toast;
 public class SearchCriteria extends Activity {
 
     Spinner designerSpin, searchRentBuySpin, styleSpinner, sizeSpinner, vielSpin;
-    String designerChoice, rentBuy, style, size, viel;
+    String designerChoice, rentBuy, style, size, viel, emailReceivedfromdressdetails;
+    String[] queryIdRetrieved;
 
     SQLiteDatabase myDB = null;
+    SQLiteQueryBuilder query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchdatabase);
+        myDB = this.openOrCreateDatabase("ProfileDB", MODE_PRIVATE, null);
 
 
         //designerSpin = (Spinner) findViewById(R.id.designer_Spin);
@@ -44,7 +50,12 @@ public class SearchCriteria extends Activity {
         addListenerSizeSpinner();
         addSearchVielSpinner();
         addListenerVielSpinner();
-
+/*
+        Intent recievedIntentFromDressDetails = getIntent();
+        Bundle bundle3 = recievedIntentFromDressDetails.getExtras();
+        emailReceivedfromdressdetails = bundle3.getString("emailaddresspassed");
+        Toast.makeText(this, emailReceivedfromdressdetails, Toast.LENGTH_SHORT).show();
+*/
     }
 
     public void addSearchRentBuySpinner() {
@@ -223,18 +234,71 @@ public class SearchCriteria extends Activity {
     }
 */
     public void SearchTheDatabase(View view) {
+        // method 1 for retrieving dress matcghing search criteria
+        int index = 0;
+        Cursor c = myDB.rawQuery("SELECT profile_id AS profileID FROM dressdetails INNER JOIN dressdetails ON (" +
+                "profile.id = dressdetails.profile_id) WHERE dressdetails.rentbuy LIKE '%" + rentBuy + "%' OR " +
+                "dressdetails.size LIKE '%" + size + "%' OR dressdetails.style LIKE '%" + style + "%' OR dressdetails.viel LIKE '%"
+                + viel + "%';", null);
+        if(c.moveToFirst()){
+            do {
+                queryIdRetrieved[index] = c.getString(c.getColumnIndex("profile_id"));
+                index++;
+            } while (c.moveToNext());
+        }
+        c.close();
 
-        String query = ("SELECT * FROM profile INNER JOIN dressdetails ON (" +
-                "profile.id = dressdetails.profile_id) WHERE dressdetails.rentbuy LIKE '%" + rentBuy + "%' AND " +
-                "dressdetails.size LIKE '%" + size + "%' AND dressdetails.style LIKE '%" + style + "%' AND dressdetails.viel LIKE '%"
-                + viel + "%';");
+        Toast.makeText(this, queryIdRetrieved[0], Toast.LENGTH_SHORT).show();
 
-        //Cursor cursor = myDB.rawQuery(query, null);
+
+        // method 2 for returning contact details of matching dress
+        String rentorName = "";
+        String rentorEmail = "";
+        String rentalprice;
+        Cursor c1 = myDB.rawQuery("SELECT username, useremail, rentalprice FROM profile where id = " + Integer.parseInt(queryIdRetrieved[0]) + ";", null);
+        Cursor c2 = myDB.rawQuery("SELECT username, useremail, rentalprice FROM profile where id = ?", new String[] {queryIdRetrieved[0]});
+        if(c1.moveToFirst()) {
+            do {
+                rentorName = c1.getString(c.getColumnIndex("username"));
+                rentorEmail = c1.getString(c.getColumnIndex("useremail"));
+                rentalprice = c1.getString(c.getColumnIndex("rentalprice"));
+                String sellerContactDetails = "The name of the seller is " + rentorName + " their email address is " + rentorEmail +" and the cost per" +
+                        "day is " + rentalprice + ";";
+                Toast.makeText(this, sellerContactDetails, Toast.LENGTH_SHORT).show();
+            } while (c1.moveToNext());
+        }
+        c.close();
+        myDB.close();
+
+
+
+
+
+        // Send results to users email
+        Log.i("Send email", "");
+
+        String[] TO = { emailReceivedfromdressdetails };
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+
+
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "P2P Weddings");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Result of SQL Query goes here");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            Log.i("Finished sending email ", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(SearchCriteria.this,
+                    "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
 
         Intent startResultMessage = new Intent(SearchCriteria.this, ResultsMessage.class);
         startActivity(startResultMessage);
 
     }
-
 
 }

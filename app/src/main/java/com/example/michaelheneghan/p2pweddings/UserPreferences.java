@@ -131,6 +131,10 @@ public class UserPreferences extends Activity {
             myIntent2.putExtra("idPassed",getId(userEmail));
             startActivity(myIntent2);
 
+            Intent myIntent3 = new Intent(UserPreferences.this,DressDetails.class);
+            myIntent3.putExtra("emailPassed", userEmail);
+            startActivity(myIntent3);
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -146,6 +150,17 @@ public class UserPreferences extends Activity {
         }
         c.close();
         return tempId;
+    }
+
+    private String getEmail(String email){
+        String selectQuery = "SELECT useremail FROM profile WHERE useremail = ?";
+        Cursor c = myDB.rawQuery(selectQuery, new String[]{email});
+        String tempEmail = "";
+        if (c.moveToFirst()) {
+            tempEmail = c.getString(c.getColumnIndex("useremail"));
+        }
+        c.close();
+        return tempEmail;
     }
 
     public void addRentBuySpinner(){

@@ -51,11 +51,12 @@
                 android:id="@+id/photoImporTV"
                 />
 
-            <Spinner
+            <Button
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right|top"
-                android:id="@+id/photoImportSpin"
+                android:id="@+id/photoImportBut"
+                android:onClick="importPhotoFromGallery"
                 />
 
             <TextView

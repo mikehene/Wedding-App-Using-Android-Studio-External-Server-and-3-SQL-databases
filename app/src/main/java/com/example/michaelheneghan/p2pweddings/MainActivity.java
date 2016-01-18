@@ -1,10 +1,13 @@
 package com.example.michaelheneghan.p2pweddings;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -80,6 +83,35 @@ public class MainActivity extends Activity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+
+            DialogFragment myFragment = new MyDialogFragment();
+            myFragment.show(getFragmentManager(), "theDialog");
+
+            return true;
+
+        }else if(id == R.id.exit_the_app){
+
+            finish();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     //How to create an intent using Intent
     public void onClick(View v){
                     try {
