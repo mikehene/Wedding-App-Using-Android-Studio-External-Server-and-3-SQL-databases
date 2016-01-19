@@ -45,6 +45,11 @@ public class Register extends Activity{
         passwordSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
+
+
                 // Creating a variable to store users password input
                 SharedPreferences sharedPref = getSharedPreferences("passwordInfo", Context.MODE_PRIVATE);
 
@@ -92,6 +97,12 @@ public class Register extends Activity{
         });
     }
 
+    public void passToLogIn(View view) {
+
+        Intent passToLogInAct = new Intent(Register.this, LogIn.class);
+        startActivity(passToLogInAct);
+
+    }
 }
 
 

@@ -81,7 +81,20 @@
         android:text="@string/LogInBut"
         android:onClick="logInButtonEntered"
         android:textStyle="bold|italic"
-        android:textSize="20dp"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register Here"
+        android:id="@+id/passToRegisterClass"
+        android:layout_above="@+id/LogInlogInButton"
+        android:textSize="12sp"
+        android:textStyle="bold|italic"
+        android:layout_marginLeft="5dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="passToRegister"
         />
 
     <ToggleButton
@@ -95,5 +108,7 @@
         android:onClick="showCharsEntered"
         android:textSize="10dp"
         android:textStyle="italic" />
+
+
 
 </RelativeLayout>

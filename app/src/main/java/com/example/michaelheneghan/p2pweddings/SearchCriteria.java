@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
@@ -22,7 +24,7 @@ public class SearchCriteria extends Activity {
 
     Spinner designerSpin, searchRentBuySpin, styleSpinner, sizeSpinner, vielSpin;
     String designerChoice, rentBuy, style, size, viel, emailReceivedfromdressdetails;
-    String[] queryIdRetrieved;
+    String queryIdRetrieved, sellerContactDetails;
 
     SQLiteDatabase myDB = null;
     SQLiteQueryBuilder query;
@@ -50,12 +52,7 @@ public class SearchCriteria extends Activity {
         addListenerSizeSpinner();
         addSearchVielSpinner();
         addListenerVielSpinner();
-/*
-        Intent recievedIntentFromDressDetails = getIntent();
-        Bundle bundle3 = recievedIntentFromDressDetails.getExtras();
-        emailReceivedfromdressdetails = bundle3.getString("emailaddresspassed");
-        Toast.makeText(this, emailReceivedfromdressdetails, Toast.LENGTH_SHORT).show();
-*/
+
     }
 
     public void addSearchRentBuySpinner() {
@@ -235,49 +232,63 @@ public class SearchCriteria extends Activity {
 */
     public void SearchTheDatabase(View view) {
         // method 1 for retrieving dress matcghing search criteria
-        int index = 0;
-        Cursor c = myDB.rawQuery("SELECT profile_id AS profileID FROM dressdetails INNER JOIN dressdetails ON (" +
+
+        /*
+        // Set cursor for any dress that match users input
+        Cursor c = myDB.rawQuery("SELECT image AS imageForEmailing FROM dressdetails INNER JOIN dressdetails ON (" +
                 "profile.id = dressdetails.profile_id) WHERE dressdetails.rentbuy LIKE '%" + rentBuy + "%' OR " +
                 "dressdetails.size LIKE '%" + size + "%' OR dressdetails.style LIKE '%" + style + "%' OR dressdetails.viel LIKE '%"
                 + viel + "%';", null);
         if(c.moveToFirst()){
             do {
-                queryIdRetrieved[index] = c.getString(c.getColumnIndex("profile_id"));
-                index++;
+                // store it as a string in a variable
+                queryIdRetrieved = c.getString(c.getColumnIndex("image"));
             } while (c.moveToNext());
         }
         c.close();
 
-        Toast.makeText(this, queryIdRetrieved[0], Toast.LENGTH_SHORT).show();
+
+        // Convert the string back into a byte array and decode
+        try{
+            byte[] bytes = queryIdRetrieved.getBytes("UTF-8");
+            BitmapFactory.decodeByteArray(bytes, 0, queryIdRetrieved.length());
+            // Catch any I/O exceptions
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
         // method 2 for returning contact details of matching dress
         String rentorName = "";
         String rentorEmail = "";
         String rentalprice;
-        Cursor c1 = myDB.rawQuery("SELECT username, useremail, rentalprice FROM profile where id = " + Integer.parseInt(queryIdRetrieved[0]) + ";", null);
-        Cursor c2 = myDB.rawQuery("SELECT username, useremail, rentalprice FROM profile where id = ?", new String[] {queryIdRetrieved[0]});
+        Cursor c1 = myDB.rawQuery("SELECT username, useremail, rentalprice FROM profile where id = " + Integer.parseInt(queryIdRetrieved) + ";", null);
+        Cursor c2 = myDB.rawQuery("SELECT username, useremail, rentalprice FROM profile where id = ?", new String[] {queryIdRetrieved});
         if(c1.moveToFirst()) {
+            // Store the values needed in variables so we can send it to the user in an email with the image
             do {
                 rentorName = c1.getString(c.getColumnIndex("username"));
                 rentorEmail = c1.getString(c.getColumnIndex("useremail"));
                 rentalprice = c1.getString(c.getColumnIndex("rentalprice"));
-                String sellerContactDetails = "The name of the seller is " + rentorName + " their email address is " + rentorEmail +" and the cost per" +
+                sellerContactDetails = "The name of the seller is " + rentorName + " their email address is " + rentorEmail +" and the cost per" +
                         "day is " + rentalprice + ";";
+
+                // Check that it has worked - Debug tool
                 Toast.makeText(this, sellerContactDetails, Toast.LENGTH_SHORT).show();
+
+                // Continue until no more dresses match the set criteria
             } while (c1.moveToNext());
         }
+
+        // Close the cursor and the database
         c.close();
         myDB.close();
-
-
-
 
 
         // Send results to users email
         Log.i("Send email", "");
 
-        String[] TO = { emailReceivedfromdressdetails };
+        String[] TO = { rentorEmail };
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.setType("text/plain");
@@ -285,7 +296,7 @@ public class SearchCriteria extends Activity {
 
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "P2P Weddings");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Result of SQL Query goes here");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, sellerContactDetails);
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));
@@ -295,10 +306,10 @@ public class SearchCriteria extends Activity {
             Toast.makeText(SearchCriteria.this,
                     "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
-
+*/
+        // Intent to pass to ResultsMessage Activity
         Intent startResultMessage = new Intent(SearchCriteria.this, ResultsMessage.class);
         startActivity(startResultMessage);
 
     }
-
 }

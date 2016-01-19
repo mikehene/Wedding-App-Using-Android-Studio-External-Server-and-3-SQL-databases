@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +31,7 @@ public class DressDetails extends Activity {
     Spinner designerSpin, styleSpin, sizeSpin,vielSpin, cleaningSpin, goToGoogleMaps;
     Button enterYourLocation, searchButton, photoImportButton;
     String designer, ImportPhotos, size, style, viel, cleaning, idReceived, emailReceived;
+    Bitmap yourSelectedImage;
     private static final int SELECT_PHOTO = 1;
 
     SQLiteDatabase myDB = null;
@@ -59,10 +62,6 @@ public class DressDetails extends Activity {
         addDryCleaningSpinner();
         addListenerDryCleaningSpinner();
 
-        Intent recievedIntent2 = getIntent();
-        Bundle bundle2 = recievedIntent2.getExtras();
-        emailReceived = bundle2.getString("emailPassed");
-        Toast.makeText(this, emailReceived, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -77,7 +76,7 @@ public class DressDetails extends Activity {
 
             // Exectute SQL statement to create the dressDetails table
             myDB.execSQL("CREATE TABLE IF NOT EXISTS dressdetails " +
-                    "(dress_id integer primary key AUTOINCREMENT, profile_id INTEGER, designer VARCHAR, style VARCHAR, size VARCHAR, viel VARCHAR, " +
+                    "(dress_id integer primary key AUTOINCREMENT, profile_id INTEGER, image BLOB, designer VARCHAR, style VARCHAR, size VARCHAR, viel VARCHAR, " +
                     "drycleaning VARCHAR, FOREIGN KEY(profile_id) REFERENCES profile(id));");
 
             // Input database address into variable to check database has in fact been created
@@ -90,14 +89,49 @@ public class DressDetails extends Activity {
                 Toast.makeText(this, "Database Missing", Toast.LENGTH_SHORT).show();
             }
 
-
         } catch (Exception e) {
 
             Log.e("PROFILE ERROR", "Error Creating Database");
 
         }
+    }
 
+    // on click intent to take user into their devices image library to choose a picture to display
+    public void importPhotoFromGallery(View view) {
 
+        photoImportButton = (Button) findViewById(R.id.photoImportBut);
+
+        photoImportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+            }
+        });
+    }
+
+    // Method to receive bundle with image Uri and convert to bitmap so it can be inputted into the database
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+
+        try{
+            switch(requestCode) {
+                case SELECT_PHOTO:
+                    if (resultCode == RESULT_OK) {
+                        Uri selectedImage = imageReturnedIntent.getData();
+                        InputStream imageStream = getContentResolver().openInputStream(selectedImage);
+                        yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        yourSelectedImage.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+                        stream.toByteArray();
+                    }
+            }
+            // Catch input/output errors
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
     }
 
     public void InsertIntoTheDatabase(View view) {
@@ -110,13 +144,12 @@ public class DressDetails extends Activity {
         String DryCleaningCost = cleaning;
 
         // Execute SQL statement to insert new data
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, designer, style, size, viel, drycleaning) VALUES ('" + idReceived + "', '" +
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image, designer, style, size, viel, drycleaning) VALUES ('" + idReceived + "', '" + yourSelectedImage + "', '" +
                 Designer + "', '" + Style + "', '" + WhatSize + "', '" + WantViel + "', '" + DryCleaningCost + "');");
 
-        // sending email adress to next activity
-        Intent sendEmail = new Intent (DressDetails.this, SearchCriteria.class);
-        sendEmail.putExtra("emailaddresspassed", emailReceived);
-        startActivity(sendEmail);
+        // Intent to move to next activity upon inserting info into database
+        Intent moveToNextActivity = new Intent(DressDetails.this, SearchCriteria.class);
+        startActivity(moveToNextActivity);
 
     }
 
@@ -239,7 +272,7 @@ public class DressDetails extends Activity {
 
         ArrayAdapter<CharSequence> SizeSpinnerAdapter =
                 ArrayAdapter.createFromResource(this,
-                        R.array.RentBuy,
+                        R.array.Size,
                         android.R.layout.simple_spinner_item);
 
         SizeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -354,38 +387,5 @@ public class DressDetails extends Activity {
 
 
     }
-    // on click intent to take user into their devices image library to choose a picture to display
-    public void importPhotoFromGallery(View view) {
 
-        photoImportButton = (Button) findViewById(R.id.photoImportBut);
-
-        photoImportButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
-            }
-        });
-    }
-
-    // Method to receive bundle with image Uri and convert to bitmap so it can be inputted into the database
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        
-        try{
-            switch(requestCode) {
-                case SELECT_PHOTO:
-                    if (resultCode == RESULT_OK) {
-                        Uri selectedImage = imageReturnedIntent.getData();
-                        InputStream imageStream = getContentResolver().openInputStream(selectedImage);
-                        Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
-                    }
-            }
-        // Catch input/output errors
-        }catch(IOException ex){
-            ex.printStackTrace();
-        }
-    }
 }

@@ -73,14 +73,16 @@
         android:password="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="@string/RegisterLogInBut"
+        android:text="Register"
         android:id="@+id/passwordSubmitButton"
-        android:layout_below="@+id/PasswordET"
-        android:layout_alignStart="@+id/PasswordET"
         android:onClick="passwordEntered"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_alignEnd="@+id/registerCharTB" />
 
 
     <TextView
@@ -89,25 +91,32 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/RegisterShowPassCharsTV"
         android:id="@+id/showCharsTV"
-        android:layout_alignBaseline="@+id/registerCharTB"
-        android:layout_alignBottom="@+id/registerCharTB"
-        android:layout_alignStart="@+id/passwordSubmitButton"
         android:textStyle="italic"
-        />
+        android:layout_alignTop="@+id/registerCharTB"
+        android:layout_alignStart="@+id/PasswordET" />
 
-        <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New ToggleButton"
-            android:id="@+id/registerCharTB"
-            android:onClick="regCharTBEntered"
-            android:textSize="10dp"
-            android:textStyle="italic"
-            android:layout_below="@+id/passwordSubmitButton"
-            android:layout_alignEnd="@+id/PasswordET"
-            android:layout_marginTop="25dp" />
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/registerCharTB"
+        android:onClick="regCharTBEntered"
+        android:textSize="10dp"
+        android:textStyle="italic"
+        android:layout_below="@+id/PasswordET"
+        android:layout_alignEnd="@+id/PasswordET"
+        android:layout_marginTop="25dp" />
 
-
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already registered? Log in here"
+        android:id="@+id/passToLogInClass"
+        android:textSize="12sp"
+        android:textStyle="bold|italic"
+        android:layout_marginLeft="5dp"
+        android:layout_above="@+id/passwordSubmitButton"
+        android:layout_centerHorizontal="true"
+        android:onClick="passToLogIn"/>
 
 </RelativeLayout>

@@ -44,4 +44,5 @@
     <string name="ProfileRentalPricePDTV">Rental Price Per day</string>
     <string name="Enter_Location_Button">Enter Location</string>
     <string name="options_exit_text">Exit</string>
+    <string name="options_log_out">options_log_out</string>
 </resources>

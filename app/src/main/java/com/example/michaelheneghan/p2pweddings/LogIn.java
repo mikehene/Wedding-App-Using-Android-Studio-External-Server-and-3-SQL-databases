@@ -14,10 +14,10 @@ import android.widget.ToggleButton;
  */
 public class LogIn extends Activity{
 
-    EditText UsernameInputET;
-    EditText LogInPasswordET;
+    EditText UsernameInputET, LogInPasswordET;
     ToggleButton charTB;
     Button logInButton;
+    UserLocalStore userLocalStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class LogIn extends Activity{
         LogInPasswordET = (EditText) findViewById(R.id.LogInPasswordET);
         charTB = (ToggleButton) findViewById(R.id.charTB);
         logInButton = (Button) findViewById(R.id.LogInlogInButton);
+        UserLocalStore userLocalStore = new UserLocalStore(this);
 
 
         charTB.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +45,10 @@ public class LogIn extends Activity{
 
     }
 
+
+
     public void logInButtonEntered(View view) {
+
 
         try {
             Class registerClass = Class.forName("com.example.michaelheneghan.p2pweddings.DressDetails");
@@ -53,6 +57,14 @@ public class LogIn extends Activity{
         }catch (Exception e){
             e.printStackTrace();
         }
+
+    }
+
+
+    public void passToRegister(View view) {
+
+        Intent passToRegisterActivity = new Intent(LogIn.this, Register.class);
+        startActivity(passToRegisterActivity);
 
     }
 }

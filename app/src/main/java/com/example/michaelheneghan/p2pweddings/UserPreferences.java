@@ -39,7 +39,6 @@ public class UserPreferences extends Activity {
         //deleteDressEt = (EditText) findViewById(R.id.deleteDressET);
         createDatabase = (Button) findViewById(R.id.createDatabase);
         //deleteDressBut = (Button) findViewById(R.id.deleteDressBut);
-        salePriceET = (EditText) findViewById(R.id.salePriceET);
         rentalPriceET = (EditText) findViewById(R.id.rentalPriceET);
 
         // Call methods to create database and spinners on activity creation
@@ -65,7 +64,7 @@ public class UserPreferences extends Activity {
             // Exectute SQL statement to create the profile table
 
             myDB.execSQL("CREATE TABLE IF NOT EXISTS profile " +
-                    "(id integer primary key AUTOINCREMENT, username VARCHAR, useraddress VARCHAR, useremail VARCHAR, rentbuy VARCHAR, saleprice VARCHAR, rentalprice VARCHAR);");
+                    "(id integer primary key AUTOINCREMENT, username VARCHAR, useraddress VARCHAR, useremail VARCHAR, rentbuy VARCHAR, rentalprice VARCHAR);");
 
             File database = getApplicationContext().getDatabasePath("ProfileDB.db");
 
@@ -84,24 +83,24 @@ public class UserPreferences extends Activity {
         }
 
         // Prepopulate table with some examples
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('mikehene', 'home', 'mikehene@gmail.com', 'Rent', " +
-                "'€0', '€100');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('farrahbu', 'home', 'farrahbu87@gmail.com', 'Rent', " +
-                "'€0', '€25');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('hanSolo', 'home', 'hansolo@gmail.com', 'Rent', " +
-                "'€0', '€50');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('lukeSkywalker', 'home', 'lukeSkywalker@gmail.com', 'Rent', " +
-                "'€0', '€75');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('princessLeia', 'home', 'princessLeia@gmail.com', 'Rent', " +
-                "'€0', '€25');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('chewbacca', 'home', 'chewbacca@gmail.com', 'Rent', " +
-                "'€0', '€50');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('C3PO', 'home', 'C3PO@gmail.com', 'Rent', " +
-                "'€0', '€100');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('biWanKenobi', 'home', 'obiWanKenobi@gmail.com', 'Rent', " +
-                "'€0', '€75');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('yoda', 'home', 'yoda@gmail.com', 'Rent', " +
-                "'€0', '€50');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('mikehene', 'home', 'mikehene@gmail.com', 'Rent', " +
+                "'€100');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('farrahbu', 'home', 'farrahbu87@gmail.com', 'Rent', " +
+                "'€25');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('hanSolo', 'home', 'hansolo@gmail.com', 'Rent', " +
+                "'€50');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('lukeSkywalker', 'home', 'lukeSkywalker@gmail.com', 'Rent', " +
+                "'€75');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('princessLeia', 'home', 'princessLeia@gmail.com', 'Rent', " +
+                "'€25');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('chewbacca', 'home', 'chewbacca@gmail.com', 'Rent', " +
+                "'€50');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('C3PO', 'home', 'C3PO@gmail.com', 'Rent', " +
+                "'€100');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('biWanKenobi', 'home', 'obiWanKenobi@gmail.com', 'Rent', " +
+                "'€75');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('yoda', 'home', 'yoda@gmail.com', 'Rent', " +
+                "'€50');");
     }
 
 
@@ -114,12 +113,11 @@ public class UserPreferences extends Activity {
         String userAddress = addressET.getText().toString();
         String userEmail = emailET.getText().toString();
         String rentBuy = rentbuy;
-        String dressSalePriceET = salePriceET.getText().toString();
         String dressRentalPriceET = rentalPriceET.getText().toString();
 
         //Execute SQL statement to insert new data
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, saleprice, rentalprice) VALUES ('" + userName + "', '" +
-                userAddress + "', '" + userEmail + "', '" + rentBuy + "', '" + dressSalePriceET + "', '" + dressRentalPriceET + "');");
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('" + userName + "', '" +
+                userAddress + "', '" + userEmail + "', '" + rentBuy + "', '" + dressRentalPriceET + "');");
 
         if(rentBuy == "Buy"){
             Intent myIntent = new Intent(UserPreferences.this,SearchCriteria.class);

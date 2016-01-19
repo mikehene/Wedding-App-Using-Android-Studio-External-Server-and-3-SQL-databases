@@ -120,11 +120,35 @@
             </intent-filter>
         </activity>
 
-        <intent-filter>
-            <action android:name="android.intent.action.SEND" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <data android:mimeType="image/*" />
-        </intent-filter>
+        <activity
+            android:name=".ServerRequests"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.SERVERREQUESTS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".User"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.USER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".UserLocalStore"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.USERLOCALSTORE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
 

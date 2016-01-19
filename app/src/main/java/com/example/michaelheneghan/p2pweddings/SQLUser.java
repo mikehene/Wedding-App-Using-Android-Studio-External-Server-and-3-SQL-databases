@@ -9,6 +9,13 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by michaelheneghan on 27/11/2015.
  */
 public class SQLUser {
+/*
+
+
+//////// THIS CLASS WAS CREATED ORIGINALLY TO IMPLEMENT AND MANIPULATE THE DATABASE BUT CHOSE TO IMPLEMENT IN ANOTHER WAY ////////////
+///////////////////////////////////////////////PLEASE IGNORE//////////////////////////////////////////////////////////////
+
+
 
         public static final String KEY_ROWID = "_id";
         public static final String KEY_NAME = "name";
@@ -84,7 +91,7 @@ public class SQLUser {
 
             return ourPreferences.insert(DATABASE_TABLE, null, cv);
         }
-
+*/
     }
 
 

@@ -71,17 +71,6 @@
         </TableRow>
 
         <TableRow >
-            <TextView android:text="@string/ProfileSaleValueTV"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/SellPrice"
-                android:textStyle="bold|italic"
-                android:padding="10dp"
-                android:textSize="20dp"
-                android:layout_marginTop="10dp"/>
-        </TableRow>
-
-        <TableRow >
             <TextView android:text="@string/ProfileRentalPricePDTV"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -155,23 +144,13 @@
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/tableLayout" />
 
-    <EditText
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:ems="10"
-        android:id="@+id/salePriceET"
-        android:layout_below="@+id/rentBuySpinner"
-        android:layout_alignRight="@+id/emailET"
-        android:layout_marginTop="10dp"
-        android:hint="€____"
-        android:onClick="SalePrice"
-        />
+
 
     <EditText
         android:layout_width="80dp"
         android:layout_height="35dp"
         android:id="@+id/rentalPriceET"
-        android:layout_below="@id/salePriceET"
+        android:layout_below="@id/rentBuySpinner"
         android:layout_alignRight="@+id/emailET"
         android:layout_marginTop="20dp"
         android:hint="€____"
@@ -244,6 +223,30 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/deleteDressBut"
         android:layout_toEndOf="@+id/createDatabase" />
+
+        <EditText
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:id="@+id/salePriceET"
+        android:layout_below="@+id/rentBuySpinner"
+        android:layout_alignRight="@+id/emailET"
+        android:layout_marginTop="10dp"
+        android:hint="€____"
+        android:onClick="SalePrice"
+
+
+    <TableRow >
+        <TextView android:text="@string/ProfileSaleValueTV"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/SellPrice"
+            android:textStyle="bold|italic"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"/>
+    </TableRow>
+        />
 
 -->
 </RelativeLayout>

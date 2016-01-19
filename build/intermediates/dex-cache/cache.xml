@@ -2,67 +2,18 @@
 <items version="2" >
 
     <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-1a7ea9341d81447c265f89a160b6c84e4260156c.jar" />
+        sha1="997773777cf3904c11d6764fe3b7668538220e49">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-8341f4e0081673847e921b2c39e8ed521b48c718.jar" />
     </item>
     <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.1.0/jars/classes.jar"
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="3178362320bcf51228835b60ff978efadfd1f783">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-f04c79a22e1ca8136ef50384d14c0e410a85bbc4.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d93480da1d303122ee67dc3bc23e6297bdef9951">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-1f4e22ce3608449e3c3c2ce25c3c531db9a8edea.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-ffb2d155b32920e67e613ceac1b676dabbadc109.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-12e31379ed1ceceeb066f721ab0f8e2cc681275d.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-5c1facdc980a9944341ddeceacc1be6612d8b30c.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="325788a04b436a0bccbc5b4c54cf0f12ebdcbd2d">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-3a1106f9dc1aba55fa11a3ddde41a32862479e9d.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="041d93cf0533591c29d1d7263b2fa114dbfb20bd">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-f926a1a9b2a33c6cd9ead2fed083e092ed31bf2d.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3c729e6d76a36c5dc27e6a4c4009296f49eaa88a">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-2f237bc8d20a7a5d629d859f0e3af782584724fb.jar" />
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-2c8ef4e70482ade772717972f5ede1968de82141.jar" />
     </item>
     <item
         jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
@@ -72,74 +23,11 @@
         <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-6eafdd20d8498ca08099a6e06bd237504d9aa25a.jar" />
     </item>
     <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.1.0/jars/classes.jar"
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="2a7e47da654546f9457deb6132364f1bf33a1857">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-ba8225b61ad8d65621755e9a6023cc9fdaa99d5b.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="997773777cf3904c11d6764fe3b7668538220e49">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-8341f4e0081673847e921b2c39e8ed521b48c718.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-a063efc17b69ed8d7f702b1549762fe8c16e2b9b.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-b92e5bd0a9006bbb71451746afa72e1d7581fd55.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="993834cb17d07d51b92db89d2c330243592ebf77">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-e7e312535506ed9d41e4f3a45661d30eb56197d7.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-3d6e1f89b445e7bd5a98cad63aeafdee8d8105b9.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="17449c47df35c754b257532052f1270c444f7993">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-6663315101557baa2ed1285e0a8e7f7128156f53.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/libs/internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-0a68f4a8a4c841eab486115f93677853ff8b77b8.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="482de223655d06253cc6a4955d653f8994169500">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-409a6c045ea6dac00007544b516d5b2d7b73ae1a.jar" />
-    </item>
-    <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-d3e8042a5768919a1197cffb845bb55a1d19873b.jar" />
+        sha1="041d93cf0533591c29d1d7263b2fa114dbfb20bd">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-f926a1a9b2a33c6cd9ead2fed083e092ed31bf2d.jar" />
     </item>
     <item
         jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.1.0/jars/classes.jar"
@@ -156,6 +44,34 @@
         <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-222cdcd1b1109d0104c772e280a23642db3342e0.jar" />
     </item>
     <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-d3e8042a5768919a1197cffb845bb55a1d19873b.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-12e31379ed1ceceeb066f721ab0f8e2cc681275d.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="2a7e47da654546f9457deb6132364f1bf33a1857">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-ba8225b61ad8d65621755e9a6023cc9fdaa99d5b.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-a063efc17b69ed8d7f702b1549762fe8c16e2b9b.jar" />
+    </item>
+    <item
         jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -163,11 +79,74 @@
         <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-fe1ec2f1b420ac822b83140e3df5179c7727499a.jar" />
     </item>
     <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-2c8ef4e70482ade772717972f5ede1968de82141.jar" />
+        sha1="993834cb17d07d51b92db89d2c330243592ebf77">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-e7e312535506ed9d41e4f3a45661d30eb56197d7.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-3d6e1f89b445e7bd5a98cad63aeafdee8d8105b9.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-b92e5bd0a9006bbb71451746afa72e1d7581fd55.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-1a7ea9341d81447c265f89a160b6c84e4260156c.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3c729e6d76a36c5dc27e6a4c4009296f49eaa88a">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-2f237bc8d20a7a5d629d859f0e3af782584724fb.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d93480da1d303122ee67dc3bc23e6297bdef9951">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-1f4e22ce3608449e3c3c2ce25c3c531db9a8edea.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-ffb2d155b32920e67e613ceac1b676dabbadc109.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3178362320bcf51228835b60ff978efadfd1f783">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-f04c79a22e1ca8136ef50384d14c0e410a85bbc4.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-0a68f4a8a4c841eab486115f93677853ff8b77b8.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="325788a04b436a0bccbc5b4c54cf0f12ebdcbd2d">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-3a1106f9dc1aba55fa11a3ddde41a32862479e9d.jar" />
     </item>
     <item
         jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.1.0/jars/classes.jar"
@@ -177,6 +156,20 @@
         <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-dcf1055df7ad1469e4dc72faa68fd9c4a05d7fd1.jar" />
     </item>
     <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-5c1facdc980a9944341ddeceacc1be6612d8b30c.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="17449c47df35c754b257532052f1270c444f7993">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-6663315101557baa2ed1285e0a8e7f7128156f53.jar" />
+    </item>
+    <item
         jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -184,11 +177,11 @@
         <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-d8c1a598e2b7c99c94d8035dbb26217e65e3842e.jar" />
     </item>
     <item
-        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/8.1.0/jars/classes.jar"
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="9cf8c0ef60847621c7ad00b4f78dbfc9daba4af2">
-        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-962021acf28c7e91883c5779bf76e4a23146f1f4.jar" />
+        sha1="482de223655d06253cc6a4955d653f8994169500">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-409a6c045ea6dac00007544b516d5b2d7b73ae1a.jar" />
     </item>
     <item
         jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/8.1.0/jars/classes.jar"
@@ -196,6 +189,13 @@
         revision="23.0.1"
         sha1="3b05c18f60969ecc2ba49c0409c4b96be2d9cb0c">
         <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-cbe233721e914ee9e94f4f102c5c98e078d02ea6.jar" />
+    </item>
+    <item
+        jar="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="9cf8c0ef60847621c7ad00b4f78dbfc9daba4af2">
+        <dex dex="/Users/michaelheneghan/Desktop/CS385/app/build/intermediates/pre-dexed/debug/classes-962021acf28c7e91883c5779bf76e4a23146f1f4.jar" />
     </item>
 
 </items>
