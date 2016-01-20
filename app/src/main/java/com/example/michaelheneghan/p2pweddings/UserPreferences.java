@@ -35,10 +35,7 @@ public class UserPreferences extends Activity {
         nameET = (EditText) findViewById(R.id.nameET);
         addressET = (EditText) findViewById(R.id.addressET);
         emailET = (EditText) findViewById(R.id.emailET);
-        //viewProfileET = (EditText) findViewById(R.id.viewProfileET);
-        //deleteDressEt = (EditText) findViewById(R.id.deleteDressET);
         createDatabase = (Button) findViewById(R.id.createDatabase);
-        //deleteDressBut = (Button) findViewById(R.id.deleteDressBut);
         rentalPriceET = (EditText) findViewById(R.id.rentalPriceET);
 
         // Call methods to create database and spinners on activity creation
@@ -119,19 +116,11 @@ public class UserPreferences extends Activity {
         myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('" + userName + "', '" +
                 userAddress + "', '" + userEmail + "', '" + rentBuy + "', '" + dressRentalPriceET + "');");
 
-        if(rentBuy == "Buy"){
-            Intent myIntent = new Intent(UserPreferences.this,SearchCriteria.class);
-            startActivity(myIntent);
-        }
         try {
 
-            Intent myIntent2 = new Intent(UserPreferences.this,DressDetails.class);
-            myIntent2.putExtra("idPassed",getId(userEmail));
+            /// Intent to send foreign key to Dressdetails Class
+            Intent myIntent2 = new Intent(UserPreferences.this,DressDetails.class); myIntent2.putExtra("idPassed",getId(userEmail));
             startActivity(myIntent2);
-
-            Intent myIntent3 = new Intent(UserPreferences.this,DressDetails.class);
-            myIntent3.putExtra("emailPassed", userEmail);
-            startActivity(myIntent3);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -150,16 +139,6 @@ public class UserPreferences extends Activity {
         return tempId;
     }
 
-    private String getEmail(String email){
-        String selectQuery = "SELECT useremail FROM profile WHERE useremail = ?";
-        Cursor c = myDB.rawQuery(selectQuery, new String[]{email});
-        String tempEmail = "";
-        if (c.moveToFirst()) {
-            tempEmail = c.getString(c.getColumnIndex("useremail"));
-        }
-        c.close();
-        return tempEmail;
-    }
 
     public void addRentBuySpinner(){
 

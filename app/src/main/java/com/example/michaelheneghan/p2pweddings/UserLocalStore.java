@@ -12,6 +12,10 @@ public class UserLocalStore extends Activity{
     public static final String SP_NAME = "userDetails";
     SharedPreferences userLocalDatabase;
 
+    public UserLocalStore(){
+
+    }
+
     public UserLocalStore(Context context){
 
         userLocalDatabase = context.getSharedPreferences(SP_NAME, 0);

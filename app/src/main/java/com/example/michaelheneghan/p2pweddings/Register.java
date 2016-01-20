@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,12 +21,9 @@ import android.widget.ToggleButton;
  */
 public class Register extends Activity{
 
-    EditText UsernameInput;
-    EditText passwordET;
-    Button userSubmitButton, toRentalsActivity;
-    Button passwordSubmitButton;
+    EditText UsernameInput, passwordET;
+    Button userSubmitButton, toRentalsActivity, passwordSubmitButton;
     ToggleButton registerCharTB;
-    TextView showCharsTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,7 @@ public class Register extends Activity{
         showCharsTV.setTypeface(myTpfc);*/
 
         UsernameInput = (EditText) findViewById(R.id.UsernameInputET);
-        final EditText passwordET = (EditText) findViewById(R.id.PasswordET);
+        passwordET = (EditText) findViewById(R.id.PasswordET);
         passwordSubmitButton = (Button) findViewById(R.id.passwordSubmitButton);
         registerCharTB = (ToggleButton) findViewById(R.id.registerCharTB);
 
@@ -46,28 +44,15 @@ public class Register extends Activity{
             @Override
             public void onClick(View v) {
 
+                // Store users username and password into string variables from ET //
+                String username = UsernameInput.getText().toString();
+                String password = passwordET.getText().toString();
 
+                // Instantiate user object and pass in retrieved username and password //
+                User user = new User(username, password);
 
-
-
-                // Creating a variable to store users password input
-                SharedPreferences sharedPref = getSharedPreferences("passwordInfo", Context.MODE_PRIVATE);
-
-                // Create an editor to convert users username and password
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("username", UsernameInput.getText().toString());
-                editor.putString("password", passwordET.getText().toString());
-
-                // Creating a variable to store users username input
-                SharedPreferences sharedPref2 = getSharedPreferences("usernameInfo", Context.MODE_PRIVATE);
-
-
-                SharedPreferences.Editor editor2 = sharedPref2.edit();
-                editor.putString("username", UsernameInput.getText().toString());
-                editor.putString("password", passwordET.getText().toString());
-
-                // Displays message to screen to let user know information has been stored
-                Toast.makeText(Register.this, "Username and Password Saved", Toast.LENGTH_LONG).show();
+                // Call method from ServerRequest class to register user //
+                registerUser(user);
 
                 // Intent to move to next activity upon click of login button
                 try {
@@ -77,8 +62,6 @@ public class Register extends Activity{
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
-                sharedPref = PreferenceManager.getDefaultSharedPreferences(Register.this);
 
             }
 
@@ -95,6 +78,18 @@ public class Register extends Activity{
                 }
             }
         });
+    }
+
+    private void registerUser(User user){
+
+        ServerRequests serverRequests = new ServerRequests(this);
+        serverRequests.storeUserDataInBackground(user, new GetUserCallBack() {
+            @Override
+            public void done(User returnedUser) {
+                startActivity(new Intent(Register.this, UserPreferences.class ));
+            }
+        });
+
     }
 
     public void passToLogIn(View view) {

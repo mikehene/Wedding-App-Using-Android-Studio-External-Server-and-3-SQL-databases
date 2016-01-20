@@ -24,6 +24,8 @@ public class ResultsMessage extends Activity {
 
     public void LogOut(View view) {
 
+
+
         /// Clear user data and logout user ///
         userLocalStore.clearUserData();
         userLocalStore.setUserLoggedIn(false);
@@ -31,6 +33,38 @@ public class ResultsMessage extends Activity {
         /// Set intent to return to login page ///
         Intent logout = new Intent(ResultsMessage.this, LogIn.class);
         startActivity(logout);
+        Toast.makeText(this, "You have succesfully logged out, thanks for useing My P2P Weddings", Toast.LENGTH_SHORT).show();
+
+        ////////// Methods to check username and password and display to screen //////////
+
+/*
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(authenticate() == true){
+            displayUsersDetails();
+        }
+        else{
+        startActivity(new Intent(ResultsMessage.this, LogIn.class));
+
+    }
+
+    /// method to authenticate user is logged in or out////
+    private boolean authenticate(){
+
+        return userLocalStore.getUserLoggedIn();
+
+    }
+
+    private void displayUsersDetails(){
+
+        User user = userLocalStore.getLoggedInUser();
+        etUsername.setText(user.username);
+        etPassword.setText(user.password);
+
+
+    }*/
 
     }
 }

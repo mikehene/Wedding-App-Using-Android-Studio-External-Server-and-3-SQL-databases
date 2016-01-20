@@ -1,6 +1,7 @@
 package com.example.michaelheneghan.p2pweddings;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -50,6 +51,15 @@ public class LogIn extends Activity{
     public void logInButtonEntered(View view) {
 
 
+        String username = UsernameInputET.getText().toString();
+        String password = LogInPasswordET.getText().toString();
+
+        User user = new User(username, password);
+
+        authenticate(user);
+
+
+
         try {
             Class registerClass = Class.forName("com.example.michaelheneghan.p2pweddings.DressDetails");
             Intent startRegister = new Intent(LogIn.this, SearchCriteria.class);
@@ -60,11 +70,44 @@ public class LogIn extends Activity{
 
     }
 
+    private void authenticate(User user ){
+
+        ServerRequests serverRequests = new ServerRequests(this);
+        serverRequests.fetchUserDataInBackground(user, new GetUserCallBack() {
+            @Override
+            public void done(User returnedUser) {
+                if (returnedUser == null) {
+                    showErrorMessage();
+                } else {
+                    logUserIn(returnedUser);
+                }
+            }
+        });
+
+
+    }
+
+    private void showErrorMessage(){
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(LogIn.this);
+        dialogBuilder.setMessage("Incorrect User Details");
+        dialogBuilder.setPositiveButton("Ok", null);
+        dialogBuilder.show();
+
+    }
+
+    private void logUserIn(User returnedUser){
+
+        userLocalStore.storeLUserData(returnedUser);
+        userLocalStore.setUserLoggedIn(true);
+
+    }
 
     public void passToRegister(View view) {
 
         Intent passToRegisterActivity = new Intent(LogIn.this, Register.class);
         startActivity(passToRegisterActivity);
+        startActivity(new Intent(this, SearchCriteria.class));
 
     }
 }

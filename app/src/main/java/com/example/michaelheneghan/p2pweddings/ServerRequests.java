@@ -31,6 +31,10 @@ public class ServerRequests extends Activity{
     public static final int CONNECTION_TIMEOUT = 1000 * 15;
     public static final String SERVER_ADDRESS = "http://cs385project.netau.net";
 
+    public ServerRequests(){
+
+    }
+
     public ServerRequests(Context context){
 
         progressDialog = new ProgressDialog(context);

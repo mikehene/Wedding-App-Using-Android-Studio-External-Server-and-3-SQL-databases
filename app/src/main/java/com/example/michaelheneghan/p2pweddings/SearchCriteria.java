@@ -24,7 +24,7 @@ public class SearchCriteria extends Activity {
 
     Spinner designerSpin, searchRentBuySpin, styleSpinner, sizeSpinner, vielSpin;
     String designerChoice, rentBuy, style, size, viel, emailReceivedfromdressdetails;
-    String queryIdRetrieved, sellerContactDetails;
+    String queryImageRetrieved, sellerContactDetails, dryCleaningDetails;
 
     SQLiteDatabase myDB = null;
     SQLiteQueryBuilder query;
@@ -37,15 +37,12 @@ public class SearchCriteria extends Activity {
 
 
         //designerSpin = (Spinner) findViewById(R.id.designer_Spin);
-        searchRentBuySpin = (Spinner) findViewById(R.id.rentBuySpin);
         styleSpinner = (Spinner) findViewById(R.id.styleSpin);
         sizeSpinner = (Spinner) findViewById(R.id.sizeSpin);
         vielSpin = (Spinner) findViewById(R.id.vielSpinner);
 
         //chooseDisgnerSpinner();
         //addListenerDesignerSpinner();
-        addSearchRentBuySpinner();
-        addListenerRentBuy();
         addStyleSpinner();
         addListenerStyleSpinner();
         addSizeSpinner();
@@ -54,40 +51,6 @@ public class SearchCriteria extends Activity {
         addListenerVielSpinner();
 
     }
-
-    public void addSearchRentBuySpinner() {
-
-        searchRentBuySpin = (Spinner) findViewById(R.id.rentBuySpin);
-
-        ArrayAdapter<CharSequence> rentBuyAdapter =
-                ArrayAdapter.createFromResource(this,
-                    R.array.RentBuy,
-                        android.R.layout.simple_spinner_item);
-
-        rentBuyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-    }
-
-    public void addListenerRentBuy(){
-
-        searchRentBuySpin = (Spinner) findViewById(R.id.rentBuySpin);
-
-        searchRentBuySpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String itemSelectedInSpinner =
-                        parent.getItemAtPosition(position).toString();
-                rentBuy = itemSelectedInSpinner;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-
-        });
-    }
-
 
     public void addStyleSpinner() {
 
@@ -233,16 +196,16 @@ public class SearchCriteria extends Activity {
     public void SearchTheDatabase(View view) {
         // method 1 for retrieving dress matcghing search criteria
 
-        /*
+
         // Set cursor for any dress that match users input
-        Cursor c = myDB.rawQuery("SELECT image AS imageForEmailing FROM dressdetails INNER JOIN dressdetails ON (" +
-                "profile.id = dressdetails.profile_id) WHERE dressdetails.rentbuy LIKE '%" + rentBuy + "%' OR " +
-                "dressdetails.size LIKE '%" + size + "%' OR dressdetails.style LIKE '%" + style + "%' OR dressdetails.viel LIKE '%"
+        Cursor c = myDB.rawQuery("SELECT image1, drycleaning FROM dressdetails INNER JOIN profile ON (" +
+                "profile.id = dressdetails.profile_id) WHERE dressdetails.size LIKE '%" + size + "%' OR dressdetails.style LIKE '%" + style + "%' OR dressdetails.viel LIKE '%"
                 + viel + "%';", null);
         if(c.moveToFirst()){
             do {
                 // store it as a string in a variable
-                queryIdRetrieved = c.getString(c.getColumnIndex("image"));
+                queryImageRetrieved = c.getString(c.getColumnIndex("image1"));
+                dryCleaningDetails = c.getString(c.getColumnIndex("drycleaning"));
             } while (c.moveToNext());
         }
         c.close();
@@ -250,34 +213,33 @@ public class SearchCriteria extends Activity {
 
         // Convert the string back into a byte array and decode
         try{
-            byte[] bytes = queryIdRetrieved.getBytes("UTF-8");
-            BitmapFactory.decodeByteArray(bytes, 0, queryIdRetrieved.length());
+            byte[] bytes = queryImageRetrieved.getBytes("UTF-8"); BitmapFactory.decodeByteArray(bytes, 0, queryImageRetrieved.length());
             // Catch any I/O exceptions
         }catch (Exception e){
             e.printStackTrace();
         }
 
 
-        // method 2 for returning contact details of matching dress
+        /// method 2 for returning contact details of matching dress from profile table and storing in variables ///
         String rentorName = "";
         String rentorEmail = "";
-        String rentalprice;
-        Cursor c1 = myDB.rawQuery("SELECT username, useremail, rentalprice FROM profile where id = " + Integer.parseInt(queryIdRetrieved) + ";", null);
-        Cursor c2 = myDB.rawQuery("SELECT username, useremail, rentalprice FROM profile where id = ?", new String[] {queryIdRetrieved});
-        if(c1.moveToFirst()) {
+        String rentalprice = "";
+        //Cursor c1 = myDB.rawQuery("SELECT username, useremail, rentalprice FROM profile where id = " + Integer.parseInt(queryIdRetrieved) + ";", null);
+        Cursor c2 = myDB.rawQuery("SELECT username, useremail, rentalprice FROM profile where id = ?", new String[] {queryImageRetrieved});
+        if(c2.moveToFirst()) {
             // Store the values needed in variables so we can send it to the user in an email with the image
             do {
-                rentorName = c1.getString(c.getColumnIndex("username"));
-                rentorEmail = c1.getString(c.getColumnIndex("useremail"));
-                rentalprice = c1.getString(c.getColumnIndex("rentalprice"));
-                sellerContactDetails = "The name of the seller is " + rentorName + " their email address is " + rentorEmail +" and the cost per" +
-                        "day is " + rentalprice + ";";
+                rentorName = c2.getString(c.getColumnIndex("username"));
+                rentorEmail = c2.getString(c.getColumnIndex("useremail"));
+                rentalprice = c2.getString(c.getColumnIndex("rentalprice"));
+                sellerContactDetails = "The name of the seller is " + rentorName + ", their email address is " + rentorEmail +", the cost per" +
+                        "day is " + rentalprice + ", and the dry cleaning cost is " + dryCleaningDetails + ";";
 
                 // Check that it has worked - Debug tool
                 Toast.makeText(this, sellerContactDetails, Toast.LENGTH_SHORT).show();
 
                 // Continue until no more dresses match the set criteria
-            } while (c1.moveToNext());
+            } while (c2.moveToNext());
         }
 
         // Close the cursor and the database
@@ -306,7 +268,7 @@ public class SearchCriteria extends Activity {
             Toast.makeText(SearchCriteria.this,
                     "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
-*/
+
         // Intent to pass to ResultsMessage Activity
         Intent startResultMessage = new Intent(SearchCriteria.this, ResultsMessage.class);
         startActivity(startResultMessage);
