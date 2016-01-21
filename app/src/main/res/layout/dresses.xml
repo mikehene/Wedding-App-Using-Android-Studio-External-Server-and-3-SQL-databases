@@ -127,7 +127,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="30dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/VielTV"
+                android:text="Veil"
                 android:textStyle="bold|italic"
                 android:textSize="20dp"
                 android:id="@+id/vielTV"
@@ -183,12 +183,14 @@
     </GridLayout>
 
     <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="@string/DressDetailsSearchBut"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="Submit dress"
         android:id="@+id/searchBut"
         android:layout_below="@+id/gridLayout"
         android:layout_centerHorizontal="true"
-        android:onClick="InsertIntoTheDatabase"/>
+        android:onClick="InsertIntoTheDatabase"
+        android:textColor="#E0ECEC"
+        android:background="#34B4A7"/>
 
 </RelativeLayout>

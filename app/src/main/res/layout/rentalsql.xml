@@ -157,96 +157,18 @@
         />
 
     <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Submit Dress"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="Submit Profile"
         android:id="@+id/createDatabase"
         android:textStyle="bold|italic"
-        android:layout_marginTop="39dp"
-        android:layout_below="@+id/tableLayout"
-        android:layout_centerHorizontal="true"
         android:onClick="InsertIntoDatabase"
-        android:clickable="true" />
-
-
-<!--
-
-    <EditText
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:id="@+id/deleteDressET"
-        android:hint="Dress ID..."
-        android:inputType="textMultiLine"
-        android:textSize="10sp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="5dp"
-        android:layout_alignStart="@+id/rentalPriceET"
-        android:layout_below="@+id/rentalPriceET"
-        android:layout_marginTop="10dp"/>
-
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete dress"
-        android:id="@+id/deleteDressBut"
-        android:onClick="deleteDressBut"
-        android:layout_below="@+id/tableLayout"
-        android:layout_alignEnd="@+id/deleteDressET" />
-
-    <TextView android:text="Delete Dress"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/deleteDressTV"
-        android:textStyle="bold|italic"
-        android:textSize="20dp"
-        android:padding="10dp"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View Profile"
-        android:id="@+id/button"
-        android:onClick="getProfile"
-        android:layout_below="@+id/deleteDressBut"
-        android:layout_toStartOf="@+id/ProfileTV" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editText"
+        android:clickable="true"
+        android:textColor="#E0ECEC"
+        android:background="#34B4A7"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/deleteDressBut"
-        android:layout_toEndOf="@+id/createDatabase" />
-
-        <EditText
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:ems="10"
-        android:id="@+id/salePriceET"
-        android:layout_below="@+id/rentBuySpinner"
-        android:layout_alignRight="@+id/emailET"
-        android:layout_marginTop="10dp"
-        android:hint="€____"
-        android:onClick="SalePrice"
+        android:layout_alignStart="@+id/ProfileTV"
+        android:layout_marginBottom="43dp" />
 
 
-    <TableRow >
-        <TextView android:text="@string/ProfileSaleValueTV"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/SellPrice"
-            android:textStyle="bold|italic"
-            android:padding="10dp"
-            android:textSize="20dp"
-            android:layout_marginTop="10dp"/>
-    </TableRow>
-        />
-
--->
 </RelativeLayout>

@@ -10,7 +10,7 @@ import android.os.Bundle;
  */
 public class Splash extends Activity {
 
-    // create variable
+    /// Initialisation of Activity EditTexts, Media, Spinners, Buttons & Strings ///
     MediaPlayer splashSong;
     @Override
     protected void onCreate(Bundle openingScreen) {
@@ -27,7 +27,7 @@ public class Splash extends Activity {
             // needs a run method
           public void run(){
               try{
-                  sleep(1000);
+                  sleep(5000);
               }catch (InterruptedException e){
                   e.printStackTrace();
               }finally {

@@ -31,22 +31,24 @@
 
     <Button
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="@string/NewUserRegisterButton"
         android:id="@+id/registerButton"
-        android:textColor="#0000ff"
         android:textSize="20sp"
         android:onClick="registerClicked"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:textColor="#E0ECEC"
+        android:background="#34B4A7"/>
 
     <Button
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:textColor="#E0ECEC"
+        android:background="#34B4A7"
+        android:layout_height="40dp"
         android:text="@string/UserLogInButton"
         android:id="@+id/LogInButton"
-        android:textColor="#0000ff"
         android:textSize="20dp"
         android:onClick="logInClicked"
         android:layout_below="@+id/tv1"
@@ -62,7 +64,7 @@
         android:layout_below="@+id/registerButton"
         android:layout_centerHorizontal="true"
         android:paddingTop="15dp"
-        android:textColor="#3232ff" />
+        android:textColor="#EF2C35"/>
 
 
     <TextView

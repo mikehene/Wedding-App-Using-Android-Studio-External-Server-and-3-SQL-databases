@@ -32,12 +32,18 @@ import java.net.URI;
  */
 public class DressDetails extends Activity {
 
+    /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     Spinner designerSpin, styleSpin, sizeSpin,vielSpin, cleaningSpin, goToGoogleMaps;
     Button enterYourLocation, searchButton, photoImportButton;
     String designer, ImportPhotos, size, style, viel, cleaning, idReceived, emailReceived;
     Bitmap yourSelectedImage;
+    byte[] returnedImage;
+    ByteArrayOutputStream stream;
+
+    /// Variable to store address  of users chosen photo from device gallery ///
     private static final int SELECT_PHOTO = 1;
 
+    /// Initiate database ///
     SQLiteDatabase myDB = null;
 
     @Override
@@ -65,6 +71,7 @@ public class DressDetails extends Activity {
         addListenerVielSpinner();
         addDryCleaningSpinner();
         addListenerDryCleaningSpinner();
+        inputExamples();
 
         /// Intent to receive foreign key passed from UserPreferences Class ///
         String idReceived = getIntent().getExtras().getString("idPassed");
@@ -90,6 +97,13 @@ public class DressDetails extends Activity {
                     "(dress_id integer primary key AUTOINCREMENT, profile_id INTEGER, image1 BLOB, designer VARCHAR, style VARCHAR, size VARCHAR, viel VARCHAR, " +
                     "drycleaning VARCHAR, FOREIGN KEY(profile_id) REFERENCES profile(id));");
 
+            /* *** JORDI this is the create statement I have been using to include an image ***
+            *
+            * myDB.execSQL("CREATE TABLE IF NOT EXISTS dressdetails " +
+                    "(dress_id integer primary key AUTOINCREMENT, profile_id INTEGER, image1 BLOB, designer VARCHAR, style VARCHAR, size VARCHAR, viel VARCHAR, " +
+                    "drycleaning VARCHAR, FOREIGN KEY(profile_id) REFERENCES profile(id));");
+            *
+            * */
             // Input database address into variable to check database has in fact been created
             File database = getApplicationContext().getDatabasePath("ProfileDB.db");
 
@@ -106,6 +120,8 @@ public class DressDetails extends Activity {
 
         }
     }
+
+
 
     // on click intent to take user into their devices image library to choose a picture to display
     public void importPhotoFromGallery(View view) {
@@ -136,7 +152,7 @@ public class DressDetails extends Activity {
                         yourSelectedImage = BitmapFactory.decodeStream(imageStream);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         yourSelectedImage.compress(Bitmap.CompressFormat.JPEG, 80, stream);
-                        stream.toByteArray();
+                        returnedImage = stream.toByteArray();
                     }
             }
             // Catch input/output errors
@@ -155,8 +171,16 @@ public class DressDetails extends Activity {
         String DryCleaningCost = cleaning;
 
         // Execute SQL statement to insert new data
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size, viel, drycleaning) VALUES ('" + idReceived + "', '" + yourSelectedImage + "', '" +
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, designer, style, size, viel, drycleaning) VALUES (" + idReceived + ", '" +
                 Designer + "', '" + Style + "', '" + WhatSize + "', '" + WantViel + "', '" + DryCleaningCost + "');");
+
+        /* *** Jordi below is the insert statement I have been trying to use including the image ***
+        *
+        * myDB.execSQL("INSERT INTO dressdetails(profile_id, designer, style, size, viel, drycleaning) VALUES ('" + idReceived + "', '" +
+                yourSelectedImage + "', '" + Designer + "', '" + Style + "', '" + WhatSize + "', '" + WantViel + "', '" + DryCleaningCost + "');");
+        *
+        * */
+
 
         // Intent to move to next activity upon inserting info into database
         Intent moveToNextActivity = new Intent(DressDetails.this, SearchCriteria.class);
@@ -171,14 +195,13 @@ public class DressDetails extends Activity {
         Drawable drawable = resources.getDrawable(image);
         Bitmap bitmap =  ((BitmapDrawable)drawable).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         byte[] bitmapData = stream.toByteArray();
-
         return bitmapData;
 
     }
 
-    /// Sample dresses inputted for your purposes, now when you search there will be some dresses to output ///
+    /// Sample dresses inputted for your purposes, now when you search there will be some dresses to output /// + yourSelectedImage + "', '"
     public void inputExamples() {
 
         int image10 = R.drawable.wdone;
@@ -200,27 +223,29 @@ public class DressDetails extends Activity {
         byte[] eg7 = convertToByteArray(image7);
         byte[] eg8 = convertToByteArray(image8);
         byte[] eg9 = convertToByteArray(image9);
-    }
-/*
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, style, size, viel, drycleaning) VALUES (1, 'Off the shoulder', " +
-                "6, 'Yes', '€25');");
 
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, style, size, viel, drycleaning) VALUES (2, " + eg2 + ", 'Long Sleeved', " +
-                "8, 'No', '€50');");
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, style, size, viel, drycleaning) VALUES (3, " + eg3 + " 'Fairy Tale', " +
-                "10, 'Yes', '€75');");
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, style, size, viel, drycleaning) VALUES (4, " + eg4 + " 'Halter Kneck', " +
-                "12, 'No', '€100');");
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, style, size, viel, drycleaning) VALUES (5', " + eg5 + " 'Vintage', " +
-                "14, 'Yes', '€75');");
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, style, size, viel, drycleaning) VALUES (6, " + eg6 + " 'Mid-Length', " +
-                "16, 'No', '€50');");
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, style, size, viel, drycleaning) VALUES (7', " + eg7 + " 'Mermaid', " +
-                "18, 'Yes', '€25');");
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, style, size, viel, drycleaning) VALUES ('8', " + eg8 + " 'Ballgown', " +
-                "20, 'No', '€50');");
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, style, size, viel, drycleaning) VALUES (9', " + eg9 + " 'Trumpet', " +
-                "14, 'Yes', '€75');");
+
+        /// Wanted to import dress details to match the 9 profiles inserted in the profile activity but could not get images to insert into the database from drawable ///
+        /// Only managed to get have them imported from gallery, which is the way for a normal user ///
+
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size, viel, drycleaning) VALUES (1, '" + eg1 + "', 'Versace', 'Off the shoulder', " +
+                "'6', 'Yes', '€25');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size, viel, drycleaning) VALUES (2, '" + eg2 + "','Angel Sanchez', 'Long Sleeved', " +
+                "'8', 'No', '€50');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size, viel, drycleaning) VALUES (3, '" + eg3 + "','Carolina Herrera', 'Fairy Tale', " +
+                "'10', 'Yes', '€75');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size,   viel, drycleaning) VALUES (4, '" + eg4 + "','Hayley Paige', 'Halter Kneck', " +
+                "'12', 'No', '€100');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size, viel, drycleaning) VALUES (5, '" + eg5 + "','Reem Acra', 'Vintage', " +
+                "'14', 'Yes', '€75');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size, viel, drycleaning) VALUES (6, '" + eg6 + "','Peter Langner', 'Mid-Length', " +
+                "'16', 'No', '€50');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size, viel, drycleaning) VALUES (7, '" + eg7 + "','Pronovias', 'Mermaid', " +
+                "'18', 'Yes', '€25');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size, viel, drycleaning) VALUES (8, '" + eg8 + "','Marchesa', 'Ballgown', " +
+                "'20', 'No', '€50');");
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size, viel, drycleaning) VALUES (9, '" + eg9 + "','Marchesa', 'Trumpet', " +
+                "'14', 'Yes', '€75');");
     }
 
     // Method to query the database and return the primary key for the user, NOT CURRENTLY USED //
@@ -235,19 +260,22 @@ public class DressDetails extends Activity {
         }
         c.close();
         return tempStyle + " : " + two;
-    }*/
+    }
 
     public void difficultSpin() {
 
         designerSpin = (Spinner) findViewById(R.id.designerSpinner);
 
+        // Create Adapter for spinner and pass in the xml file with user options
         ArrayAdapter<CharSequence> designSpinnerAdapter =
                 ArrayAdapter.createFromResource(this,
                         R.array.DesignerChoice,
                         android.R.layout.simple_spinner_item);
 
+        // Set how the options will be displayed to the user
         designSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        // Attach adapter to spinner
         designerSpin.setAdapter(designSpinnerAdapter);
 
     }
@@ -256,7 +284,7 @@ public class DressDetails extends Activity {
 
         designerSpin = (Spinner) findViewById(R.id.designerSpinner);
 
-
+        // Store users choice in a variable enabling us to later add to the profile table
         designerSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -264,7 +292,6 @@ public class DressDetails extends Activity {
                         parent.getItemAtPosition(position).toString();
                 designer = itemSelectedInSpinner;
             }
-
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -275,7 +302,7 @@ public class DressDetails extends Activity {
 
 
 
-    // Insert back into activity once button and ET has been created in xml //
+    /// Please revert to notes above on first spinner ///
     public void addStyleSpinner(){
 
         styleSpin = (Spinner) findViewById(R.id.styleSpinner);
@@ -291,6 +318,7 @@ public class DressDetails extends Activity {
 
     }
 
+    /// Please revert to notes above on first spinner ///
     public void addListenerStyleSpinner() {
 
         styleSpin = (Spinner) findViewById(R.id.styleSpinner);
@@ -298,6 +326,7 @@ public class DressDetails extends Activity {
 
         styleSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
+            // Store users choice in a variable enabling us to later add to the profile table
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String itemSelectedInSpinner =
                         parent.getItemAtPosition(position).toString();
@@ -312,7 +341,7 @@ public class DressDetails extends Activity {
         });
     }
 
-
+    /// Please revert to notes above on first spinner ///
     public void addSizeSpinner(){
 
         sizeSpin = (Spinner) findViewById(R.id.sizeSpinner);
@@ -328,6 +357,7 @@ public class DressDetails extends Activity {
 
     }
 
+    /// Please revert to notes above on first spinner ///
     public void addListenerSizeSpinner(){
 
         sizeSpin = (Spinner) findViewById(R.id.sizeSpinner);
@@ -350,6 +380,7 @@ public class DressDetails extends Activity {
 
     }
 
+    /// Please revert to notes above on first spinner ///
     public void addVielSpinner(){
 
         vielSpin = (Spinner) findViewById(R.id.vielSpinner);
@@ -365,6 +396,7 @@ public class DressDetails extends Activity {
 
     }
 
+    /// Please revert to notes above on first spinner ///
     public void addListenerVielSpinner(){
 
         vielSpin = (Spinner) findViewById(R.id.vielSpinner);
@@ -387,7 +419,7 @@ public class DressDetails extends Activity {
 
     }
 
-
+    /// Please revert to notes above on first spinner ///
     public void addDryCleaningSpinner(){
 
         cleaningSpin = (Spinner) findViewById(R.id.cleaningSpinner);
@@ -403,6 +435,7 @@ public class DressDetails extends Activity {
 
     }
 
+    /// Please revert to notes above on first spinner ///
     public void addListenerDryCleaningSpinner(){
 
         cleaningSpin = (Spinner) findViewById(R.id.cleaningSpinner);
@@ -425,7 +458,7 @@ public class DressDetails extends Activity {
 
     }
 
-    // on click intent to take user to googlemaps using an intent
+    /// On click intent to take user to googlemaps using an intent ///
     public void enterLocation(View view) {
 
         Intent startGoogleSplash = new Intent(DressDetails.this, GoogleMapsSplash.class);

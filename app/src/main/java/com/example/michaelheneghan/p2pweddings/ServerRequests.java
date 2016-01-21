@@ -27,6 +27,7 @@ import java.util.Map;
  */
 public class ServerRequests extends Activity{
 
+    /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     ProgressDialog progressDialog;
     public static final int CONNECTION_TIMEOUT = 1000 * 15;
     public static final String SERVER_ADDRESS = "http://cs385project.netau.net";
@@ -35,6 +36,7 @@ public class ServerRequests extends Activity{
 
     }
 
+    /// Constructor set ///
     public ServerRequests(Context context){
 
         progressDialog = new ProgressDialog(context);
@@ -79,34 +81,33 @@ public class ServerRequests extends Activity{
              dataToSend.put("username", user.username);
              dataToSend.put("password", user.password);
 
-             //Server Communication part - it's relatively long but uses standard methods
+             /// Server Communication ///
 
-             //Encoded String - we will have to encode string by our custom method (Very easy)
+             /// Encoded String ///
              String encodedStr = getEncodedData(dataToSend);
 
-             //Will be used if we want to read some data from server
+             /// Used to read data from server ///
              BufferedReader reader = null;
 
-             //Connection Handling
+             /// Connection Handling ///
              try {
-                 //Converting address String to URL
+                 //Converting address String to URL ///
                  URL url = new URL(SERVER_ADDRESS + "Register.php");
-                 //Opening the connection (Not setting or using CONNECTION_TIMEOUT)
+                 /// Opening the connection ///
                  HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
                  //Post Method
                  con.setRequestMethod("POST");
-                 //To enable inputting values using POST method
-                 //(Basically, after this we can write the dataToSend to the body of POST method)
+                 /// To enable inputting values using POST method ///
+
                  con.setDoOutput(true);
                  OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream());
-                 //Writing dataToSend to outputstreamwriter
+                 /// Writing dataToSend to outputstreamwriter ///
                  writer.write(encodedStr);
-                 //Sending the data to the server - This much is enough to send data to server
-                 //But to read the response of the server, you will have to implement the procedure below
+                 /// Sending the data to the server ///
                  writer.flush();
 
-                 //Data Read Procedure - Basically reading the data comming line by line
+                 //Data Read Procedure ///
                  StringBuilder sb = new StringBuilder();
                  reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
@@ -114,9 +115,9 @@ public class ServerRequests extends Activity{
                  while((line = reader.readLine()) != null) { //Read till there is something available
                      sb.append(line + "\n");     //Reading and saving line by line - not all at once
                  }
-                 line = sb.toString();           //Saving complete data received in string, you can do it differently
+                 line = sb.toString();           //Saving complete data received in string ///
 
-                 //Just check to the values received in Logcat
+                 /// To check the values received in Logcat ///
                  Log.i("custom_check", "The values received in the store part are as follows:");
                  Log.i("custom_check",line);
 
@@ -131,44 +132,9 @@ public class ServerRequests extends Activity{
                      }
                  }
              }
-
-             //Same return null, but if you want to return the read string (stored in line)
-             //then change the parameters of AsyncTask and return that type, by converting
-             //the string - to say JSON or user in your case
-             return null;
-         }
-             /*
-             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
-             dataToSend.add(new BasicNameValuePair("username", user.username));
-             dataToSend.add(new BasicNameValuePair("password", user.password));
-
-             HttpParams httpRequestParam = new BasicHttpParams();
-             HttpConnectionParams.setConnectionTimeout(httpRequestParam, CONNECTION_TIMEOUT);
-             HttpConnectionParams.setSoTimeout( httpRequestParam, CONNECTION_TIMEOUT);
-
-             HttpClient client = new DefalutHttpClient(httpRequestParam);
-             HttpPost post = new HttpPost(SERVER_ADDRESS, "Register.php");
-
-             try{
-
-                 post.setEntity(new UrlEncodedFormEntity(dataToSend));
-                 client.execute(post);
-
-             }catch(Exception e){
-                e.printStackTrace();
-             }
-
-
              return null;
          }
 
-         @Override
-         protected void onPostExecute(Void aVoid) {
-
-             progressDialog.dismiss();
-             userCallBack.done(null);
-             super.onPostExecute(aVoid);
-         }*/
 
          private String getEncodedData(Map<String,String> data) {
              StringBuilder sb = new StringBuilder();
@@ -204,36 +170,35 @@ public class ServerRequests extends Activity{
         @Override
         protected User doInBackground(Void... params) {
 
-            //Use HashMap, it works similar to NameValuePair
+            /// Use HashMap ///
             Map<String,String> dataToSend = new HashMap<>();
             dataToSend.put("username", user.username);
             dataToSend.put("password", user.password);
 
-            //Server Communication part - it's relatively long but uses standard methods
+            /// Server Communication ///
 
-            //Encoded String - we will have to encode string by our custom method (Very easy)
+            /// Encoded String - I have to encode string by the custom method ///
             String encodedStr = getEncodedData(dataToSend);
 
-            //Will be used if we want to read some data from server
+            /// Will be used to read data from server //
             BufferedReader reader = null;
 
             //Connection Handling
             try {
-                //Converting address String to URL
+                /// Converting address String to URL ///
                 URL url = new URL(SERVER_ADDRESS + "FetchUserData.php");
-                //Opening the connection (Not setting or using CONNECTION_TIMEOUT)
+                /// Opening the connection ///
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-                //Post Method
+                /// Post Method ///
                 con.setRequestMethod("POST");
-                //To enable inputting values using POST method
-                //(Basically, after this we can write the dataToSend to the body of POST method)
+                /// To enable inputting values using POST method ///
                 con.setDoOutput(true);
                 OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream());
-                //Writing dataToSend to outputstreamwriter
+                /// Writing dataToSend to outputstreamwriter ///
                 writer.write(encodedStr);
                 //Sending the data to the server - This much is enough to send data to server
-                //But to read the response of the server, you will have to implement the procedure below
+                //But to read the response of the server, I have to implemented the procedure below
                 writer.flush();
 
                 //Data Read Procedure - Basically reading the data comming line by line
@@ -262,54 +227,11 @@ public class ServerRequests extends Activity{
                 }
             }
 
-            //Same return null, but if you want to return the read string (stored in line)
-            //then change the parameters of AsyncTask and return that type, by converting
-            //the string - to say JSON or user in your case
             return null;
 
-            /*
-            ArrayList<NameValuePair> dataToSend = new ArrayList<>();
-            dataToSend.add(new BasicNameValuePair("username", user.username));
-            dataToSend.add(new BasicNameValuePair("password", user.password));
-
-            HttpParams httpRequestParam = new BasicHttpParams();
-            HttpConnectionParams.setConnectionTimeout(httpRequestParam, CONNECTION_TIMEOUT);
-            HttpConnectionParams.setSoTimeout(httpRequestParam, CONNECTION_TIMEOUT);
-
-            HttpClient client = new DefalutHttpClient(httpRequestParam);
-            HttpPost post = new HttpPost(SERVER_ADDRESS, "FetchUserData.php");
-
-            User returnedUser = null;
-            try{
-
-                post.setEntity(new UrlEncodedFormEntity(dataToSend));
-                HttpResponse httpResponse = client.execute(post);
-
-                HttpEntity entity = httpResponse.getEntity();
-                String result = EntityUtils.toString(entity);
-                JSONObject jObject = JSONObject(result);
-
-                if(jObject.length() == 0){
-
-                    returnedUser = null;
-
-                }
-                else{
-
-                    String username = jObject.getString("username");
-                    String password = jObject.getString("password");
-
-                    returnedUser = new User(user.username, user.password);
-                }
-
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-
-
-            return returnedUser;*/
         }
 
+        /// Method to show dialog box and close ///
         @Override
         protected void onPostExecute(User returnedUser) {
 
@@ -318,6 +240,7 @@ public class ServerRequests extends Activity{
             super.onPostExecute(returnedUser);
         }
 
+        /// Converts encoded data to a string ///
         private String getEncodedData(Map<String,String> data) {
             StringBuilder sb = new StringBuilder();
             for(String key : data.keySet()) {

@@ -15,6 +15,7 @@ import android.widget.ToggleButton;
  */
 public class LogIn extends Activity{
 
+    /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     EditText UsernameInputET, LogInPasswordET;
     ToggleButton charTB;
     Button logInButton;

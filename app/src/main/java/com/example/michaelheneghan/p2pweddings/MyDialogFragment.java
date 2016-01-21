@@ -12,6 +12,8 @@ import android.widget.Toast;
  */
 public class MyDialogFragment extends DialogFragment{
 
+    // Class created to inform user when theme had been changed but button to toggle themes not created due to time ///
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 

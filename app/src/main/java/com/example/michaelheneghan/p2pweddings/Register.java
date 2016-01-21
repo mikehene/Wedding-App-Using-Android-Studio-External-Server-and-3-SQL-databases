@@ -21,6 +21,7 @@ import android.widget.ToggleButton;
  */
 public class Register extends Activity{
 
+    /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     EditText UsernameInput, passwordET;
     Button userSubmitButton, toRentalsActivity, passwordSubmitButton;
     ToggleButton registerCharTB;

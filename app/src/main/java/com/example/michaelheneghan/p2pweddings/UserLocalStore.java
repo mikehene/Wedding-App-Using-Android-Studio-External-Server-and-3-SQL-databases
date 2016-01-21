@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
  */
 public class UserLocalStore extends Activity{
 
+    /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     public static final String SP_NAME = "userDetails";
     SharedPreferences userLocalDatabase;
 

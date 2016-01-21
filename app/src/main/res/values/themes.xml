@@ -15,6 +15,7 @@
     </style>
 
 
+    <!-- Themes created and dialogue class written but no time to complete button to toggle app themes -->
     <color name="ActivityColorBisque">#fee4c4</color>
     <color name="ActivityColorDarkPurple">#85737b</color>
     <color name="ActivityColorLightPurple">#BDB6D5</color>

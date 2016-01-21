@@ -12,6 +12,7 @@ import android.widget.Toast;
  */
 public class ResultsMessage extends Activity {
 
+    /// Initialisation of Activity EditTexts, Spinners, Buttons, Objects & Strings ///
     UserLocalStore userLocalStore;
 
     @Override

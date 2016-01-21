@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -14,14 +15,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 
+import java.util.Locale;
+
 
 public class MainActivity extends Activity {
 
-    // Create variables
+    /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     Button registerButton, LogInButton;
     Spinner themeSpinner;
     ToggleButton musicTB;
@@ -31,10 +35,14 @@ public class MainActivity extends Activity {
     String themes = "ActivityThemeBisque/ActivityThemeDarkPurple/ActivityThemeLightPurple/ActivityThemePastelGreen";
 
     @Override
+    /// Method called upon opening of Activity ///
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //CustomFont.replaceDefaultFont(this, "DEFAULT", "lobsterregular.ttf");
+
+        /// Calling custom font class to add imported font (in asset folder) to app globally///
+        CustomFont.replaceDefaultFont(this, "DEFAULT", "lobster.ttf");
+
 
         registerButton = (Button) findViewById(R.id.registerButton);
         LogInButton = (Button) findViewById(R.id.LogInButton);

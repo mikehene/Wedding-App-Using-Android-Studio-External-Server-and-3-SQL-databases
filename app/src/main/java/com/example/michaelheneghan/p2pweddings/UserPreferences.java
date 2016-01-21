@@ -21,6 +21,8 @@ import java.io.File;
  * Created by michaelheneghan on 23/11/2015.
  */
 public class UserPreferences extends Activity {
+
+    /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     EditText nameET, addressET, emailET, viewProfileET, salePriceET, deleteDressEt, rentalPriceET;
     Button createDatabase, deleteDressBut;
     Spinner rentBuySpinner;
@@ -96,7 +98,7 @@ public class UserPreferences extends Activity {
                 "'€100');");
         myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('biWanKenobi', 'home', 'obiWanKenobi@gmail.com', 'Rent', " +
                 "'€75');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('yoda', 'home', 'yoda@gmail.com', 'Rent', " +
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('yoda', 'home', 'mikehene@gmail.com', 'Rent', " +
                 "'€50');");
     }
 
@@ -116,18 +118,28 @@ public class UserPreferences extends Activity {
         myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('" + userName + "', '" +
                 userAddress + "', '" + userEmail + "', '" + rentBuy + "', '" + dressRentalPriceET + "');");
 
-        try {
-
-            /// Intent to send foreign key to Dressdetails Class
-            Intent myIntent2 = new Intent(UserPreferences.this,DressDetails.class); myIntent2.putExtra("idPassed",getId(userEmail));
-            startActivity(myIntent2);
-
-        }catch (Exception e){
-            e.printStackTrace();
+        /// If user wishes to rent a dress from someone then they are passed to the search page else they move onto dress details ///
+        if(rentBuy.equals("Rent")){
+            Intent myIntent = new Intent(UserPreferences.this,SearchCriteria.class);
+            startActivity(myIntent);
         }
+        else{
+            try {
+
+                /// Intent to send foreign key to Dressdetails Class
+                Intent myIntent2 = new Intent(UserPreferences.this,DressDetails.class);
+                myIntent2.putExtra("idPassed",getId(userEmail));
+                startActivity(myIntent2);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
 
     }
 
+    /// Method to get users email which is then called above when passing foreign key to dress details class ///
     private String getId(String email){
         String selectQuery = "SELECT id FROM profile WHERE useremail = ?";
         Cursor c = myDB.rawQuery(selectQuery, new String[]{email});
@@ -140,24 +152,26 @@ public class UserPreferences extends Activity {
     }
 
 
+    /// Method for creating adapter and setting values to drop down boxes ///
     public void addRentBuySpinner(){
 
         rentBuySpinner = (Spinner) findViewById(R.id.rentBuySpinner);
 
-        // Create Adapter for spinner and pass in the xml file with user options
+        /// Create Adapter for spinner and pass in the xml file with user options ///
         ArrayAdapter<CharSequence> rentBuySpinnerAdapter =
                 ArrayAdapter.createFromResource(this,
                         R.array.RentBuy,
                         android.R.layout.simple_spinner_item);
 
-        // Set how the options will be displayed to the user
+        /// Set how the options will be displayed to the user ///
         rentBuySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // Attach adapter to spinner
+        /// Attach adapter to spinner ///
         rentBuySpinner.setAdapter(rentBuySpinnerAdapter);
 
     }
 
+    /// Method for storing the chosen option in a variable to be inserted into the database later ///
     public void addListenerRentBuySpinner(){
 
         rentBuySpinner = (Spinner) findViewById(R.id.rentBuySpinner);
@@ -179,6 +193,8 @@ public class UserPreferences extends Activity {
 
     }
 
+    /// A method for app designer to run when wanting to search for a particular users details ///
+    /// Maybe after a user has made a request to the Administrator ///
     public void getProfile(View view) {
 
         // Use a cursor to provide read and write access to database results
@@ -225,7 +241,7 @@ public class UserPreferences extends Activity {
 
     }
 
-    // Delete an individual dress from database using primary key
+    // Delete an individual dress from database using primary key, for Administrator use ///
     public void deleteDressBut(View view) {
 
         // Retrieve the emailaddress of the the user to delete their dress
