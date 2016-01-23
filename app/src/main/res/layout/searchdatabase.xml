@@ -131,7 +131,7 @@
         android:layout_centerHorizontal="true"
         android:onClick="SearchTheDatabase"
         android:textColor="#E0ECEC"
-        android:background="#34B4A7"/>
+        android:background="@drawable/buttonfeatures"/>
 
 
         </RelativeLayout>

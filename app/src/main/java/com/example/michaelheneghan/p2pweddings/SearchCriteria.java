@@ -33,6 +33,7 @@ public class SearchCriteria extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.searchdatabase);
         myDB = this.openOrCreateDatabase("ProfileDB", MODE_PRIVATE, null);
 

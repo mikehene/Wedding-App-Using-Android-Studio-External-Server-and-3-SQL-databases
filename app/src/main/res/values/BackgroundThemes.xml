@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="BackgroundThemes">
+        <item>ActivityColorBisque</item>
+        <item>ActivityColorDarkPurple</item>
+        <item>ActivityColorLightPurple</item>
+        <item>ActivityColorPastelGreen</item>
+    </string-array>
+
+</resources>

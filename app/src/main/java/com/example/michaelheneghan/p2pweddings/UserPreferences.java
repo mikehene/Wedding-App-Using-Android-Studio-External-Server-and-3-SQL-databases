@@ -20,20 +20,25 @@ import java.io.File;
 /**
  * Created by michaelheneghan on 23/11/2015.
  */
-public class UserPreferences extends Activity {
+public class UserPreferences extends Activity implements View.OnClickListener{
 
     /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     EditText nameET, addressET, emailET, viewProfileET, salePriceET, deleteDressEt, rentalPriceET;
-    Button createDatabase, deleteDressBut;
-    Spinner rentBuySpinner;
-    private String rentbuy;
+    Button createDatabase;
+    Spinner rentBuySpinner, changeBackgroundspinner;
+    private String rentbuy, background;
 
     SQLiteDatabase myDB = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /// Method call to set theme of activity according to user choice in Profile Activity ///
+        themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.rentalsql);
+
+        changeBackgroundspinner = (Spinner) findViewById(R.id.changeBackgroundSpinner);
         nameET = (EditText) findViewById(R.id.nameET);
         addressET = (EditText) findViewById(R.id.addressET);
         emailET = (EditText) findViewById(R.id.emailET);
@@ -44,6 +49,8 @@ public class UserPreferences extends Activity {
         createDatabase(null);
         addRentBuySpinner();
         addListenerRentBuySpinner();
+        addBackgroundSpinner();
+        addListenerBackgroundSpinner();
 
     }
 
@@ -193,6 +200,47 @@ public class UserPreferences extends Activity {
 
     }
 
+    /// Method for creating adapter and setting values to drop down boxes of what theme user has chosen to view the app in ///
+    public void addBackgroundSpinner(){
+
+        changeBackgroundspinner = (Spinner) findViewById(R.id.changeBackgroundSpinner);
+
+        /// Create Adapter for spinner and pass in the xml file with user options ///
+        ArrayAdapter<CharSequence> backgroundSpinnerAdapter =
+                ArrayAdapter.createFromResource(this,
+                        R.array.BackgroundThemes,
+                        android.R.layout.simple_spinner_item);
+
+        /// Set how the options will be displayed to the user ///
+        backgroundSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        /// Attach adapter to spinner ///
+        changeBackgroundspinner.setAdapter(backgroundSpinnerAdapter);
+
+    }
+
+    /// Method for storing the chosen option in a variable to be used when storing what theme the user wishes to view the app in ///
+    public void addListenerBackgroundSpinner(){
+
+        changeBackgroundspinner = (Spinner) findViewById(R.id.changeBackgroundSpinner);
+
+        // Store users choice in a variable enabling us to later add to the profile table
+        changeBackgroundspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String itemSelectedInSpinner =
+                        parent.getItemAtPosition(position).toString();
+                background = itemSelectedInSpinner;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
     /// A method for app designer to run when wanting to search for a particular users details ///
     /// Maybe after a user has made a request to the Administrator ///
     public void getProfile(View view) {
@@ -280,6 +328,25 @@ public class UserPreferences extends Activity {
             Toast.makeText(this, "Database Missing", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    /// Below is the onclick method to change the theme background dependent upon what user has chose in Spinner ///
+    @Override
+    public void onClick(View v) {
+        switch (background){
+            case "ActivityColorBisqueTheme":
+                themeUtils.changeToTheme(this, themeUtils.ActivityColorBisque);
+                break;
+            case "ActivityColorDarkPurpleTheme":
+                themeUtils.changeToTheme(this, themeUtils.ActivityColorDarkPurple);
+                break;
+            case "ActivityColorLightPurpleTheme":
+                themeUtils.changeToTheme(this, themeUtils.ActivityColorLightPurple);
+                break;
+            case "ActivityColorPastelGreenTheme":
+                themeUtils.changeToTheme(this, themeUtils.ActivityColorPastelGreen);
+                break;
+        }
     }
 }
 

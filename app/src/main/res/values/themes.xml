@@ -16,24 +16,24 @@
 
 
     <!-- Themes created and dialogue class written but no time to complete button to toggle app themes -->
-    <color name="ActivityColorBisque">#fee4c4</color>
-    <color name="ActivityColorDarkPurple">#85737b</color>
-    <color name="ActivityColorLightPurple">#BDB6D5</color>
-    <color name="ActivityColorPastelGreen">#DCFFEE</color>
+    <color name="ActivityColorBisqueColour">#fee4c4</color>
+    <color name="ActivityColorDarkPurpleColour">#85737b</color>
+    <color name="ActivityColorLightPurpleColour">#BDB6D5</color>
+    <color name="ActivityColorPastelGreenColour">#DCFFEE</color>
 
-    <style name="ActivityThemeBisque" parent="android:Theme.Light">
-        <item name="android:windowBackground">@color/ActivityColorBisque </item>
+    <style name="ActivityThemeBisqueTheme" parent="android:Theme.Light">
+        <item name="android:windowBackground">@color/ActivityColorBisqueColour </item>
     </style>
 
-    <style name="ActivityThemeDarkPurple" parent="android:Theme.Light">
-        <item name="android:windowBackground">@color/ActivityColorDarkPurple</item>
+    <style name="ActivityThemeDarkPurpleTheme" parent="android:Theme.Light">
+        <item name="android:windowBackground">@color/ActivityColorDarkPurpleColour</item>
     </style>
 
-    <style name="ActivityThemeLightPurple" parent="android:Theme.Light">
-        <item name="android:windowBackground">@color/ActivityColorLightPurple </item>
+    <style name="ActivityThemeLightPurpleTheme" parent="android:Theme.Light">
+        <item name="android:windowBackground">@color/ActivityColorLightPurpleColour </item>
     </style>
 
-    <style name="ActivityThemePastelGreen" parent="android:Theme.Light">
-        <item name="android:windowBackground">@color/ActivityColorPastelGreen </item>
+    <style name="ActivityThemePastelGreenTheme" parent="android:Theme.Light">
+        <item name="android:windowBackground">@color/ActivityColorPastelGreenColour </item>
     </style>
 </resources>

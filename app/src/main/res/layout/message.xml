@@ -59,13 +59,14 @@
         />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:text="Log Out"
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
-        android:onClick="LogOut"/>
+        android:onClick="LogOut"
+        android:background="@drawable/buttonfeatures"/>
 
 </RelativeLayout>

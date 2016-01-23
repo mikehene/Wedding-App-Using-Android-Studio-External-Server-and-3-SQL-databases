@@ -191,6 +191,6 @@
         android:layout_centerHorizontal="true"
         android:onClick="InsertIntoTheDatabase"
         android:textColor="#E0ECEC"
-        android:background="#34B4A7"/>
+        android:background="@drawable/buttonfeatures"/>
 
 </RelativeLayout>

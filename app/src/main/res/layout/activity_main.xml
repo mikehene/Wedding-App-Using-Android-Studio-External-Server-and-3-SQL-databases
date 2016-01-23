@@ -18,15 +18,12 @@
         android:id="@+id/logo"
         android:src="@mipmap/ic_launcher"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="true"
         android:paddingTop="10dp" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-
         android:layout_margin="20dp" />
 
     <Button
@@ -40,12 +37,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:textColor="#E0ECEC"
-        android:background="#34B4A7"/>
+        android:background="@drawable/buttonfeatures"/>
 
     <Button
         android:layout_width="300dp"
         android:textColor="#E0ECEC"
-        android:background="#34B4A7"
+        android:background="@drawable/buttonfeatures"
         android:layout_height="40dp"
         android:text="@string/UserLogInButton"
         android:id="@+id/LogInButton"

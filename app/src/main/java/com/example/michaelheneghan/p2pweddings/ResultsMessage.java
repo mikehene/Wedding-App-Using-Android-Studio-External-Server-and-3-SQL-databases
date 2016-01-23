@@ -18,6 +18,7 @@ public class ResultsMessage extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.message);
         UserLocalStore userLocalStore = new UserLocalStore(this);
 

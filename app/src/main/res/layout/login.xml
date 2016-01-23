@@ -83,7 +83,7 @@
         android:textStyle="bold|italic"
         android:textSize="20sp"
         android:textColor="#E0ECEC"
-        android:background="#34B4A7"
+        android:background="@drawable/buttonfeatures"
         />
 
     <TextView

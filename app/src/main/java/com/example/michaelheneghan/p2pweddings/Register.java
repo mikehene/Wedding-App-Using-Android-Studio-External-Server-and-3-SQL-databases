@@ -29,10 +29,8 @@ public class Register extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.register);
-        /*Typeface myTpfc = Typeface.createFromAsset(getAssets(), "assets/fonts/lobster.ttf");
-        showCharsTV = (TextView) findViewById(R.id.showCharsTV);
-        showCharsTV.setTypeface(myTpfc);*/
 
         UsernameInput = (EditText) findViewById(R.id.UsernameInputET);
         passwordET = (EditText) findViewById(R.id.PasswordET);

@@ -45,4 +45,8 @@
     <string name="Enter_Location_Button">Enter Location</string>
     <string name="options_exit_text">Exit</string>
     <string name="options_log_out">options_log_out</string>
+    <string name="ActivityColorDarkPurple.">ActivityColorDarkPurple</string>
+    <string name="ActivityThemeBisque.">ActivityThemeBisque</string>
+    <string name="ActivityColorLightPurple.">ActivityColorLightPurple</string>
+    <string name="ActivityColorPastelGreen.">ActivityColorPastelGreen</string>
 </resources>

@@ -24,6 +24,7 @@ public class LogIn extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.login);
 
         UsernameInputET = (EditText) findViewById(R.id.UsernameInputET);

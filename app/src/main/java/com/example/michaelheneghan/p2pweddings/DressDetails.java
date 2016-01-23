@@ -49,6 +49,7 @@ public class DressDetails extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.dresses);
 
         designerSpin = (Spinner) findViewById(R.id.designerSpinner);

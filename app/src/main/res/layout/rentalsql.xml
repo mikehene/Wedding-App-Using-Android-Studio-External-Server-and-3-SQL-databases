@@ -165,10 +165,31 @@
         android:onClick="InsertIntoDatabase"
         android:clickable="true"
         android:textColor="#E0ECEC"
-        android:background="#34B4A7"
+        android:background="@drawable/buttonfeatures"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/ProfileTV"
         android:layout_marginBottom="43dp" />
+
+    <Spinner
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:id="@+id/changeBackgroundSpinner"
+        android:layout_below="@+id/rentalPriceET"
+        android:layout_alignRight="@+id/rentalPriceET"
+        android:layout_alignEnd="@+id/rentalPriceET" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose a background colour"
+        android:id="@+id/changeBackground"
+        android:layout_below="@+id/tableLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold|italic"
+        android:textSize="20dp"
+        android:paddingTop="13dp"
+        android:paddingLeft="10dp" />
 
 
 </RelativeLayout>

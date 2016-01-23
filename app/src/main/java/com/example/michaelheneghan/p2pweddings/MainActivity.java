@@ -23,7 +23,7 @@ import android.widget.ToggleButton;
 import java.util.Locale;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
 
     /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     Button registerButton, LogInButton;
@@ -38,11 +38,15 @@ public class MainActivity extends Activity {
     /// Method called upon opening of Activity ///
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /// Method call to set theme of activity according to user choice in Profile Activity ///
+        themeUtils.onActivityCreateSetTheme(this);
+
+        /// Below calls which XML layout to show next ///
         setContentView(R.layout.activity_main);
 
         /// Calling custom font class to add imported font (in asset folder) to app globally///
         CustomFont.replaceDefaultFont(this, "DEFAULT", "lobster.ttf");
-
 
         registerButton = (Button) findViewById(R.id.registerButton);
         LogInButton = (Button) findViewById(R.id.LogInButton);
