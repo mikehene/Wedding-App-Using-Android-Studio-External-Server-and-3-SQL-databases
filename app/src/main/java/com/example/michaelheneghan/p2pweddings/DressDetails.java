@@ -33,9 +33,12 @@ import java.net.URI;
 public class DressDetails extends Activity {
 
     /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
-    Spinner designerSpin, styleSpin, sizeSpin,vielSpin, cleaningSpin, goToGoogleMaps;
+    Spinner designerSpin, styleSpin, sizeSpin,vielSpin, cleaningSpin;
     Button enterYourLocation, searchButton, photoImportButton;
-    String designer, ImportPhotos, size, style, viel, cleaning, idReceived, emailReceived;
+    String designer, ImportPhotos, size, style, viel, cleaning, idReceived, emailReceivedFromUserPref;
+
+    /// Intent to receive foreign key passed from UserPreferences Class ///
+
     Bitmap yourSelectedImage;
     byte[] returnedImage;
     ByteArrayOutputStream stream;
@@ -51,6 +54,7 @@ public class DressDetails extends Activity {
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.dresses);
+        CustomFont.replaceDefaultFont(this, "DEFAULT", "lobster.ttf");
 
         designerSpin = (Spinner) findViewById(R.id.designerSpinner);
         styleSpin = (Spinner) findViewById(R.id.styleSpinner);
@@ -74,13 +78,12 @@ public class DressDetails extends Activity {
         addListenerDryCleaningSpinner();
         inputExamples();
 
-        /// Intent to receive foreign key passed from UserPreferences Class ///
-        String idReceived = getIntent().getExtras().getString("idPassed");
+
+        idReceived = getIntent().getExtras().getString("idPassed");
         // Toast to check activity received foreign key, will be removed before lauch so user cannot view ///
         Toast.makeText(this, idReceived, Toast.LENGTH_SHORT).show();
-
-        //inputExamples();
-
+        emailReceivedFromUserPref = getIntent().getExtras().getString("emailPassedFromUserPref");
+        //Toast.makeText(this, emailReceivedFromUserPref, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -98,13 +101,7 @@ public class DressDetails extends Activity {
                     "(dress_id integer primary key AUTOINCREMENT, profile_id INTEGER, image1 BLOB, designer VARCHAR, style VARCHAR, size VARCHAR, viel VARCHAR, " +
                     "drycleaning VARCHAR, FOREIGN KEY(profile_id) REFERENCES profile(id));");
 
-            /* *** JORDI this is the create statement I have been using to include an image ***
-            *
-            * myDB.execSQL("CREATE TABLE IF NOT EXISTS dressdetails " +
-                    "(dress_id integer primary key AUTOINCREMENT, profile_id INTEGER, image1 BLOB, designer VARCHAR, style VARCHAR, size VARCHAR, viel VARCHAR, " +
-                    "drycleaning VARCHAR, FOREIGN KEY(profile_id) REFERENCES profile(id));");
-            *
-            * */
+
             // Input database address into variable to check database has in fact been created
             File database = getApplicationContext().getDatabasePath("ProfileDB.db");
 
@@ -172,19 +169,13 @@ public class DressDetails extends Activity {
         String DryCleaningCost = cleaning;
 
         // Execute SQL statement to insert new data
-        myDB.execSQL("INSERT INTO dressdetails(profile_id, designer, style, size, viel, drycleaning) VALUES (" + idReceived + ", '" +
-                Designer + "', '" + Style + "', '" + WhatSize + "', '" + WantViel + "', '" + DryCleaningCost + "');");
-
-        /* *** Jordi below is the insert statement I have been trying to use including the image ***
-        *
-        * myDB.execSQL("INSERT INTO dressdetails(profile_id, designer, style, size, viel, drycleaning) VALUES ('" + idReceived + "', '" +
-                yourSelectedImage + "', '" + Designer + "', '" + Style + "', '" + WhatSize + "', '" + WantViel + "', '" + DryCleaningCost + "');");
-        *
-        * */
+        myDB.execSQL("INSERT INTO dressdetails(profile_id, image1, designer, style, size, viel, drycleaning) VALUES (" + idReceived + ", '" +
+                returnedImage + "', '" + Designer + "', '" + Style + "', '" + WhatSize + "', '" + WantViel + "', '" + DryCleaningCost + "');");
 
 
         // Intent to move to next activity upon inserting info into database
         Intent moveToNextActivity = new Intent(DressDetails.this, SearchCriteria.class);
+        moveToNextActivity.putExtra("emailPassedFromDressDetails", emailReceivedFromUserPref);
         startActivity(moveToNextActivity);
 
     }

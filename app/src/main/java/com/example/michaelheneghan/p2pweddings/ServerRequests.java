@@ -29,12 +29,7 @@ public class ServerRequests extends Activity{
 
     /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     ProgressDialog progressDialog;
-    public static final int CONNECTION_TIMEOUT = 1000 * 15;
     public static final String SERVER_ADDRESS = "http://cs385project.netau.net";
-
-    public ServerRequests(){
-
-    }
 
     /// Constructor set ///
     public ServerRequests(Context context){
@@ -235,9 +230,10 @@ public class ServerRequests extends Activity{
         @Override
         protected void onPostExecute(User returnedUser) {
 
+            super.onPostExecute(returnedUser);
             progressDialog.dismiss();
             userCallBack.done(returnedUser);
-            super.onPostExecute(returnedUser);
+
         }
 
         /// Converts encoded data to a string ///

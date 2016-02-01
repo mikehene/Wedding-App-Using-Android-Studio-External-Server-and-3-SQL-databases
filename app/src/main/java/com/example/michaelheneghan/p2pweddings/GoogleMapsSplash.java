@@ -10,7 +10,7 @@ import android.os.Handler;
  */
 public class GoogleMapsSplash extends Activity {
 
-    private static int SPLASH_SCREEN_DELAY = 3000;
+    private static int SPLASH_SCREEN_DELAY = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

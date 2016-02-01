@@ -134,37 +134,5 @@ public class MainActivity extends Activity{
                         e.printStackTrace();
                     }
             }
-    /*
-    public void changeTheme(View view) {
 
-        ArrayAdapter<CharSequence> themeSpinnerAdapter =
-                ArrayAdapter.createFromResource(this,
-                        R.array.RentBuy,
-                        android.R.layout.simple_spinner_item);
-
-        themeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        themeSpinner.setAdapter(themeSpinnerAdapter);
-
-    }
-
-    public void addListenerThemeSpinner(){
-
-        themeSpinner = (Spinner) findViewById(R.id.themeSpinner);
-
-        themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String itemSelectedInSpinner =
-                        parent.getItemAtPosition(position).toString();
-                themes = itemSelectedInSpinner;
-                ;
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-    }*/
 }

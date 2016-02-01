@@ -8,6 +8,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 /*
@@ -26,6 +27,7 @@ public class LogIn extends Activity{
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.login);
+        CustomFont.replaceDefaultFont(this, "DEFAULT", "lobster.ttf");
 
         UsernameInputET = (EditText) findViewById(R.id.UsernameInputET);
         LogInPasswordET = (EditText) findViewById(R.id.LogInPasswordET);
@@ -45,29 +47,22 @@ public class LogIn extends Activity{
             }
         });
 
-
     }
-
-
 
     public void logInButtonEntered(View view) {
 
 
         String username = UsernameInputET.getText().toString();
         String password = LogInPasswordET.getText().toString();
+        if((username == null || username.equals(""))){
+            Toast.makeText(LogIn.this, "You must enter a Username", Toast.LENGTH_SHORT).show();
+        }
+        else if(password == null || password.equals("")) {
+            Toast.makeText(LogIn.this, "You must enter a Password", Toast.LENGTH_SHORT).show();
+        }else {
+            User user = new User(username, password);
+            authenticate(user);
 
-        User user = new User(username, password);
-
-        authenticate(user);
-
-
-
-        try {
-            Class registerClass = Class.forName("com.example.michaelheneghan.p2pweddings.DressDetails");
-            Intent startRegister = new Intent(LogIn.this, SearchCriteria.class);
-            startActivity(startRegister);
-        }catch (Exception e){
-            e.printStackTrace();
         }
 
     }
@@ -82,6 +77,8 @@ public class LogIn extends Activity{
                     showErrorMessage();
                 } else {
                     logUserIn(returnedUser);
+                    Intent DressDetailsIntent = new Intent(LogIn.this, SearchCriteria.class);
+                    startActivity(DressDetailsIntent);
                 }
             }
         });

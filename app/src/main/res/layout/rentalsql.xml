@@ -139,10 +139,11 @@
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:id="@+id/rentBuySpinner"
-        android:layout_marginLeft="80dp"
         android:paddingTop="15dp"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/tableLayout" />
+        android:layout_below="@+id/emailET"
+        android:layout_alignRight="@+id/emailET"
+        android:layout_alignEnd="@+id/emailET"
+        android:layout_marginTop="5dp"/>
 
 
 
@@ -150,11 +151,11 @@
         android:layout_width="80dp"
         android:layout_height="35dp"
         android:id="@+id/rentalPriceET"
-        android:layout_below="@id/rentBuySpinner"
-        android:layout_alignRight="@+id/emailET"
-        android:layout_marginTop="20dp"
         android:hint="€____"
-        />
+        android:layout_above="@+id/changeBackground"
+        android:layout_alignRight="@+id/rentBuySpinner"
+        android:layout_alignEnd="@+id/rentBuySpinner"
+        android:layout_marginBottom="5dp"/>
 
     <Button
         android:layout_width="200dp"

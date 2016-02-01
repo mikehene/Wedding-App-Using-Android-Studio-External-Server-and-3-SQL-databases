@@ -10,9 +10,6 @@ public class User extends Activity {
     /// Class and constructor to creat user object for login/registery ///
     String name, username, password;
 
-    public User(){
-
-    }
 
     public User(String username, String password){
 

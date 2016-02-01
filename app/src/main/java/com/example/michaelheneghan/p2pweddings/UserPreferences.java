@@ -1,7 +1,6 @@
 package com.example.michaelheneghan.p2pweddings;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -23,7 +22,8 @@ import java.io.File;
 public class UserPreferences extends Activity implements View.OnClickListener{
 
     /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
-    EditText nameET, addressET, emailET, viewProfileET, salePriceET, deleteDressEt, rentalPriceET;
+    EditText nameET, addressET, emailET, viewProfileET, rentalPriceET, deleteDressEt;
+    String email;
     Button createDatabase;
     Spinner rentBuySpinner, changeBackgroundspinner;
     private String rentbuy, background;
@@ -37,6 +37,7 @@ public class UserPreferences extends Activity implements View.OnClickListener{
         /// Method call to set theme of activity according to user choice in Profile Activity ///
         themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.rentalsql);
+        CustomFont.replaceDefaultFont(this, "DEFAULT", "lobster.ttf");
 
         changeBackgroundspinner = (Spinner) findViewById(R.id.changeBackgroundSpinner);
         nameET = (EditText) findViewById(R.id.nameET);
@@ -51,7 +52,6 @@ public class UserPreferences extends Activity implements View.OnClickListener{
         addListenerRentBuySpinner();
         addBackgroundSpinner();
         addListenerBackgroundSpinner();
-
     }
 
 
@@ -62,7 +62,6 @@ public class UserPreferences extends Activity implements View.OnClickListener{
         // and a DatabaseErrorHandler in the case of database corruption
 
         try {
-            //  saleprice VARCHAR, saleprice, rentalprice VARCHAR, rentalprice, dressSalePriceET + "', '" + dressRentalPriceET +
 
             myDB = this.openOrCreateDatabase("ProfileDB",
                     MODE_PRIVATE, null);
@@ -74,6 +73,8 @@ public class UserPreferences extends Activity implements View.OnClickListener{
 
             File database = getApplicationContext().getDatabasePath("ProfileDB.db");
 
+            /// Call method to prepopulate table with examples ///
+            //inputExamples();
             // Check if the database exists
             if (!database.exists()) {
                 Toast.makeText(this, "Database Created", Toast.LENGTH_SHORT).show();
@@ -89,75 +90,27 @@ public class UserPreferences extends Activity implements View.OnClickListener{
         }
 
         // Prepopulate table with some examples
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('mikehene', 'home', 'mikehene@gmail.com', 'Rent', " +
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('mikehene', 'home', 'mikehene@gmail.com', 'Rent out', " +
                 "'€100');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('farrahbu', 'home', 'farrahbu87@gmail.com', 'Rent', " +
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('farrahbu', 'home', 'mikehene@gmail.com', 'Rent out', " +
                 "'€25');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('hanSolo', 'home', 'hansolo@gmail.com', 'Rent', " +
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('hanSolo', 'home', 'hansolo@gmail.com', 'Rent out', " +
                 "'€50');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('lukeSkywalker', 'home', 'lukeSkywalker@gmail.com', 'Rent', " +
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('lukeSkywalker', 'home', 'lukeSkywalker@gmail.com', 'Rent out', " +
                 "'€75');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('princessLeia', 'home', 'princessLeia@gmail.com', 'Rent', " +
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('princessLeia', 'home', 'princessLeia@gmail.com', 'Rent out', " +
                 "'€25');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('chewbacca', 'home', 'chewbacca@gmail.com', 'Rent', " +
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('chewbacca', 'home', 'chewbacca@gmail.com', 'Rent out', " +
                 "'€50');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('C3PO', 'home', 'C3PO@gmail.com', 'Rent', " +
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('C3PO', 'home', 'C3PO@gmail.com', 'Rent out', " +
                 "'€100');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('biWanKenobi', 'home', 'obiWanKenobi@gmail.com', 'Rent', " +
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('biWanKenobi', 'home', 'obiWanKenobi@gmail.com', 'Rent out', " +
                 "'€75');");
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('yoda', 'home', 'mikehene@gmail.com', 'Rent', " +
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('yoda', 'home', 'mikehene@gmail.com', 'Rent out', " +
                 "'€50');");
-    }
-
-
-
-
-    public void InsertIntoDatabase(View view) {
-
-        //Get the details entered by the user and store in variables
-        String userName = nameET.getText().toString();
-        String userAddress = addressET.getText().toString();
-        String userEmail = emailET.getText().toString();
-        String rentBuy = rentbuy;
-        String dressRentalPriceET = rentalPriceET.getText().toString();
-
-        //Execute SQL statement to insert new data
-        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('" + userName + "', '" +
-                userAddress + "', '" + userEmail + "', '" + rentBuy + "', '" + dressRentalPriceET + "');");
-
-        /// If user wishes to rent a dress from someone then they are passed to the search page else they move onto dress details ///
-        if(rentBuy.equals("Rent")){
-            Intent myIntent = new Intent(UserPreferences.this,SearchCriteria.class);
-            startActivity(myIntent);
-        }
-        else{
-            try {
-
-                /// Intent to send foreign key to Dressdetails Class
-                Intent myIntent2 = new Intent(UserPreferences.this,DressDetails.class);
-                myIntent2.putExtra("idPassed",getId(userEmail));
-                startActivity(myIntent2);
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
 
 
     }
-
-    /// Method to get users email which is then called above when passing foreign key to dress details class ///
-    private String getId(String email){
-        String selectQuery = "SELECT id FROM profile WHERE useremail = ?";
-        Cursor c = myDB.rawQuery(selectQuery, new String[]{email});
-        String tempId = "";
-        if (c.moveToFirst()) {
-            tempId = c.getString(c.getColumnIndex("id"));
-        }
-        c.close();
-        return tempId;
-    }
-
 
     /// Method for creating adapter and setting values to drop down boxes ///
     public void addRentBuySpinner(){
@@ -240,6 +193,82 @@ public class UserPreferences extends Activity implements View.OnClickListener{
         });
 
     }
+    /// Below is the onclick method to change the theme background dependent upon what user has chose in Spinner ///
+    @Override
+    public void onClick(View v) {
+
+        switch (background){
+            case "ActivityColorBisqueTheme":
+                themeUtils.changeToTheme(this, themeUtils.ActivityColorBisque);
+                break;
+            case "ActivityColorDarkPurpleTheme":
+                themeUtils.changeToTheme(this, themeUtils.ActivityColorDarkPurple);
+                break;
+            case "ActivityColorLightPurpleTheme":
+                themeUtils.changeToTheme(this, themeUtils.ActivityColorLightPurple);
+                break;
+            case "ActivityColorPastelGreenTheme":
+                themeUtils.changeToTheme(this, themeUtils.ActivityColorPastelGreen);
+                break;
+        }
+
+    }
+
+    public void InsertIntoDatabase(View view) {
+
+        //Get the details entered by the user and store in variables
+        String userName = nameET.getText().toString();
+        String userAddress = addressET.getText().toString();
+        String userEmail = emailET.getText().toString();
+        String rentBuy = rentbuy;
+        String dressRentalPriceET = rentalPriceET.getText().toString();
+
+        //Execute SQL statement to insert new data
+        myDB.execSQL("INSERT INTO profile (username, useraddress, useremail, rentbuy, rentalprice) VALUES ('" + userName + "', '" +
+                userAddress + "', '" + userEmail + "', '" + rentBuy + "', '" + dressRentalPriceET + "');");
+
+        /// If user wishes to rent a dress from someone then they are passed to the search page else they move onto dress details ///
+        if(rentBuy.equals("Rent")){
+            Intent myIntent = new Intent(UserPreferences.this,SearchCriteria.class);
+            myIntent.putExtra("emailPassedFromUserPref", email);
+            startActivity(myIntent);
+        }
+        else{
+            try {
+                /// Intent to send foreign key to Dressdetails Class
+                Intent myIntent2 = new Intent(UserPreferences.this,DressDetails.class);
+                myIntent2.putExtra("idPassed",getId(userEmail));
+                myIntent2.putExtra("emailPassedFromUserPref", email);
+                startActivity(myIntent2);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+    }
+    /// Method to get users email which is then called above when passing foreign key to dress details class ///
+    private String getId(String email){
+        String selectQuery = "SELECT id FROM profile WHERE useremail = ?";
+        Cursor c = myDB.rawQuery(selectQuery, new String[]{email});
+        String tempId = "";
+        if (c.moveToFirst()) {
+            tempId = c.getString(c.getColumnIndex("id"));
+        }
+        c.close();
+        return tempId;
+    }
+    private String getEmail(String email){
+        String selectQuery = "SELECT useremail FROM profile WHERE useremail = ?";
+        Cursor c = myDB.rawQuery(selectQuery, new String[]{email});
+        String tempEmail = "";
+        if (c.moveToFirst()) {
+            tempEmail = c.getString(c.getColumnIndex("useremail"));
+        }
+        c.close();
+        return tempEmail;
+    }
+
 
     /// A method for app designer to run when wanting to search for a particular users details ///
     /// Maybe after a user has made a request to the Administrator ///
@@ -269,7 +298,7 @@ public class UserPreferences extends Activity implements View.OnClickListener{
                 String id = cursor.getString(idColumn);
                 String name = cursor.getString(nameColumn);
                 String address = cursor.getString(addressColumn);
-                String email = cursor.getString(emailColumn);
+                email = cursor.getString(emailColumn);
                 String rentbuy = cursor.getString(rentBuyColumn);
 
                 profileList = profileList + id + " : " + name + " : " + email + " : " + address + " : " + rentbuy + "\n";
@@ -303,9 +332,6 @@ public class UserPreferences extends Activity implements View.OnClickListener{
 
     }
 
-
-
-
     // Close database when app is shutdown
     @Override
     protected void onDestroy() {
@@ -326,26 +352,6 @@ public class UserPreferences extends Activity implements View.OnClickListener{
             Toast.makeText(this, "Database Created", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Database Missing", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    /// Below is the onclick method to change the theme background dependent upon what user has chose in Spinner ///
-    @Override
-    public void onClick(View v) {
-        switch (background){
-            case "ActivityColorBisqueTheme":
-                themeUtils.changeToTheme(this, themeUtils.ActivityColorBisque);
-                break;
-            case "ActivityColorDarkPurpleTheme":
-                themeUtils.changeToTheme(this, themeUtils.ActivityColorDarkPurple);
-                break;
-            case "ActivityColorLightPurpleTheme":
-                themeUtils.changeToTheme(this, themeUtils.ActivityColorLightPurple);
-                break;
-            case "ActivityColorPastelGreenTheme":
-                themeUtils.changeToTheme(this, themeUtils.ActivityColorPastelGreen);
-                break;
         }
     }
 }

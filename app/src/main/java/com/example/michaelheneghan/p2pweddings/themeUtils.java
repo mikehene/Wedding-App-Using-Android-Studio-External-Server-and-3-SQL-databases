@@ -11,12 +11,11 @@ public class themeUtils {
     private static int cTheme;
 
 
-
-    public final static int ActivityColorBisque = 2;
+    public final static int ActivityColorLightPurple = 0;
 
     public final static int ActivityColorDarkPurple = 1;
 
-    public final static int ActivityColorLightPurple = 0;
+    public final static int ActivityColorBisque = 2;
 
     public final static int ActivityColorPastelGreen = 3;
 
@@ -42,8 +41,6 @@ public class themeUtils {
         switch (cTheme)
 
         {
-
-            default:
 
             case ActivityColorLightPurple:
 

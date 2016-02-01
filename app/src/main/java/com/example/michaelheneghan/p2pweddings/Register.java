@@ -23,7 +23,7 @@ public class Register extends Activity{
 
     /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     EditText UsernameInput, passwordET;
-    Button userSubmitButton, toRentalsActivity, passwordSubmitButton;
+    Button passwordSubmitButton;
     ToggleButton registerCharTB;
 
     @Override
@@ -31,6 +31,7 @@ public class Register extends Activity{
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.register);
+        CustomFont.replaceDefaultFont(this, "DEFAULT", "lobster.ttf");
 
         UsernameInput = (EditText) findViewById(R.id.UsernameInputET);
         passwordET = (EditText) findViewById(R.id.PasswordET);
@@ -46,20 +47,27 @@ public class Register extends Activity{
                 // Store users username and password into string variables from ET //
                 String username = UsernameInput.getText().toString();
                 String password = passwordET.getText().toString();
+                if((username == null || username.equals(""))){
+                    Toast.makeText(Register.this, "You must enter a Username", Toast.LENGTH_SHORT).show();
+                }
+                else if(password == null || password.equals("")) {
+                    Toast.makeText(Register.this, "You must enter a Password", Toast.LENGTH_SHORT).show();
+                }else{
 
-                // Instantiate user object and pass in retrieved username and password //
-                User user = new User(username, password);
+                    // Instantiate user object and pass in retrieved username and password //
+                    User user = new User(username, password);
 
-                // Call method from ServerRequest class to register user //
-                registerUser(user);
+                    // Call method from ServerRequest class to register user //
+                    registerUser(user);
 
-                // Intent to move to next activity upon click of login button
-                try {
-                    Class rentalsClass = Class.forName("com.example.michaelheneghan.p2pweddings.UserPreferences");
-                    Intent startLogIn = new Intent(Register.this, rentalsClass);
-                    startActivity(startLogIn);
-                }catch (Exception e){
-                    e.printStackTrace();
+                    // Intent to move to next activity upon click of login button
+                    try {
+                        Class rentalsClass = Class.forName("com.example.michaelheneghan.p2pweddings.UserPreferences");
+                        Intent startLogIn = new Intent(Register.this, rentalsClass);
+                        startActivity(startLogIn);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
 
             }
@@ -85,7 +93,6 @@ public class Register extends Activity{
         serverRequests.storeUserDataInBackground(user, new GetUserCallBack() {
             @Override
             public void done(User returnedUser) {
-                startActivity(new Intent(Register.this, UserPreferences.class ));
             }
         });
 

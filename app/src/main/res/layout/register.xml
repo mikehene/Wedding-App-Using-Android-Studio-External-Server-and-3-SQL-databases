@@ -30,13 +30,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/RegisterUsernameTV"
         android:id="@+id/registerUsernameTV"
-        android:layout_below="@+id/registerTitleTV"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="54dp"
         android:textSize="15sp"
         android:textStyle="italic"
         android:gravity="left"
-        android:paddingLeft="25dp" />
+        android:paddingLeft="25dp"
+        android:layout_below="@+id/registerTitleTV"
+        />
 
     <EditText
         android:layout_width="300dp"

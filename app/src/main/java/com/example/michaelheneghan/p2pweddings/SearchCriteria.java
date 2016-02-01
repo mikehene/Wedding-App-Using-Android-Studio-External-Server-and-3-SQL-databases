@@ -4,18 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
 
 /**
  * Created by michaelheneghan on 23/11/2015.
@@ -25,7 +25,11 @@ public class SearchCriteria extends Activity {
     /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     Spinner designerSpin, styleSpinner, sizeSpinner, vielSpin;
     String designerChoice, style, size, viel;
-    String queryImageRetrieved, sellerContactDetails, dryCleaningDetails, dressesProfileId;
+    String queryImageRetrieved, sellerContactDetails, dryCleaningDetails, dressesProfileId, emailReceivedFromDressDetails, emailReceivedFromUserPref;
+    String rentorName = "";
+    String rentorEmail = "";
+    String rentalPrice = "";
+    Uri bmpUri;
 
     /// Initiate database ///
     SQLiteDatabase myDB = null;
@@ -35,6 +39,9 @@ public class SearchCriteria extends Activity {
         super.onCreate(savedInstanceState);
         themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.searchdatabase);
+        CustomFont.replaceDefaultFont(this, "DEFAULT", "lobster.ttf");
+
+        /// Open database ready for use ///
         myDB = this.openOrCreateDatabase("ProfileDB", MODE_PRIVATE, null);
 
 
@@ -51,6 +58,9 @@ public class SearchCriteria extends Activity {
         addListenerSizeSpinner();
         addSearchVielSpinner();
         addListenerVielSpinner();
+
+        emailReceivedFromDressDetails = getIntent().getExtras().getString("emailPassedFromDressDetails");
+        emailReceivedFromUserPref = getIntent().getExtras().getString("emailPassedFromUserPref");
 
     }
 
@@ -213,15 +223,13 @@ public class SearchCriteria extends Activity {
     public void SearchTheDatabase(View view) {
         /// method 1 for retrieving dress matcghing search criteria ///
 
-        /// ******** JORDI commented out below  is how I have been trying to retrieve the image from the database *******
-
         /*Cursor c = myDB.rawQuery("SELECT profile_id, image1, designer, drycleaning FROM dressdetails INNER JOIN profile ON (" +
                 "profile.id = dressdetails.profile_id) WHERE dressdetails.size LIKE '%" + size + "%' OR dressdetails.style LIKE '%" + style + "%' OR dressdetails.viel LIKE '%"
                 + viel + "%';", null);*/
 
         /// Set cursor for any dress that match users input ///
         Cursor c = myDB.rawQuery("SELECT profile_id, image1, drycleaning FROM dressdetails INNER JOIN profile ON (" +
-                "profile.id = dressdetails.profile_id) WHERE dressdetails.size LIKE '%" + size + "%' OR dressdetails.style LIKE '%" + style + "%' OR dressdetails.viel LIKE '%"
+                "profile.id = dressdetails.profile_id) WHERE dressdetails.size LIKE '%" + size + "%' AND dressdetails.style LIKE '%" + style + "%' AND dressdetails.viel LIKE '%"
                 + viel + "%';", null);
         if(c.moveToFirst()){
             do {
@@ -236,7 +244,7 @@ public class SearchCriteria extends Activity {
 
         c.close();
 
-        /// *** Here I try to convert the string back into a byte array *** ///
+        /// *** Here I convert the string back into a byte array *** ///
         byte[] bytes;
         try{
             bytes = queryImageRetrieved.getBytes("UTF-8"); BitmapFactory.decodeByteArray(bytes, 0, queryImageRetrieved.length());
@@ -246,11 +254,17 @@ public class SearchCriteria extends Activity {
             e.printStackTrace();
         }
 
+        /*String pathofBmp = null;
+        try {
+            pathofBmp = MediaStore.Images.Media.insertImage(getContentResolver(), queryImageRetrieved,"title", null);
+                bmpUri = Uri.parse(pathofBmp);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }*/
+
 
         /// method 2 for returning contact details of matching dress from profile table and storing in variables ///
-        String rentorName = "";
-        String rentorEmail = "";
-        String rentalPrice = "";
+
         String query = "SELECT username, useremail, rentalprice FROM profile INNER JOIN dressdetails ON (" +
                 "profile.id = dressdetails.profile_id) WHERE id = ?";
         Cursor c1 = myDB.rawQuery(query, new String[] { dressesProfileId });
@@ -264,7 +278,7 @@ public class SearchCriteria extends Activity {
                 rentalPrice = c1.getString(c1.getColumnIndex("rentalprice"));
                 sellerContactDetails = "The name of the seller is " + rentorName + ", their email address is " + rentorEmail +
                         ", the rental price is " + rentalPrice + " and the dry cleaning cost is " + dryCleaningDetails + ";";
-
+                sendEmail();
                 // Check that it has worked - Debug tool
                 Toast.makeText(this, sellerContactDetails, Toast.LENGTH_SHORT).show();
 
@@ -275,33 +289,34 @@ public class SearchCriteria extends Activity {
         // Close the cursor and the database
         c1.close();
         myDB.close();
+    }
 
-
-        // Send results to users email
-        Log.i("Send email", "");
-
-        String[] TO = { rentorEmail };
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("plain/text");
-
-
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "P2P Weddings");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, sellerContactDetails);
+    public void sendEmail(){
 
         try {
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            Log.i("Send email", "");
+            String[] TO = { emailReceivedFromUserPref, emailReceivedFromDressDetails  };
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setData(Uri.parse("mailto:"));
+
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"tlysaght@cs.nuim.ie"});
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "P2P Weddings");
+            emailIntent.putExtra(Intent.EXTRA_TEXT, sellerContactDetails);
+            emailIntent.setType("plain/text");
+            emailIntent.setType("image/jpeg");
+            Uri uri = Uri.parse("file://" + queryImageRetrieved);
+            emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+            //System.out.println("You have reached here and uri has a value " + uri);
+            //emailIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);  // This is another method for sending images via email
+            startActivity(Intent.createChooser(emailIntent, "Send mail Using :"));
             finish();
             Log.i("Finished sending email ", "");
+            Intent startResultMessage = new Intent(SearchCriteria.this, ResultsMessage.class);
+            startActivity(startResultMessage);
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(SearchCriteria.this,
                     "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
-
-        // Intent to pass to ResultsMessage Activity
-        Intent startResultMessage = new Intent(SearchCriteria.this, ResultsMessage.class);
-        startActivity(startResultMessage);
 
     }
 }

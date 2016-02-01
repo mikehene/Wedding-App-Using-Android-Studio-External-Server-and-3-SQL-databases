@@ -11,11 +11,8 @@ public class UserLocalStore extends Activity{
 
     /// Initialisation of Activity EditTexts, Spinners, Buttons & Strings ///
     public static final String SP_NAME = "userDetails";
+
     SharedPreferences userLocalDatabase;
-
-    public UserLocalStore(){
-
-    }
 
     public UserLocalStore(Context context){
 
@@ -31,17 +28,6 @@ public class UserLocalStore extends Activity{
         spEditor.commit();
     }
 
-    public User getLoggedInUser(){
-
-        String name = userLocalDatabase.getString("name", "");
-        String username = userLocalDatabase.getString("name", "");
-        String password = userLocalDatabase.getString("name", "");
-
-        User storedUser = new User(username, password);
-
-        return storedUser;
-    }
-
     public void setUserLoggedIn(boolean loggedIn){
 
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
@@ -49,25 +35,5 @@ public class UserLocalStore extends Activity{
         spEditor.commit();
 
     }
-
-    public boolean getUserLoggedIn(){
-
-        if(userLocalDatabase.getBoolean("loggedIn", false)) {
-            return true;
-        }else{
-            return false;
-        }
-
-    }
-
-
-    public void clearUserData(){
-
-        SharedPreferences.Editor spEditor = userLocalDatabase.edit();
-        spEditor.clear();
-        spEditor.commit();
-
-    }
-
 
 }
